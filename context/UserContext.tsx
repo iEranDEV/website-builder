@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 
-export const UserContext = createContext<{user: User | null, authorize: Function, loading: boolean, setLoading: Function}>({
+export const UserContext = createContext<{user: User | null, authorize: Function, logOut: Function, loading: boolean, setLoading: Function}>({
     user: null,
     authorize: () => {},
+    logOut: () => {},
     loading: false,
     setLoading: () => {},
 })
@@ -17,6 +18,12 @@ export const UserContextProvider = ({ children } : {children: JSX.Element}) => {
         localStorage.setItem('user', JSON.stringify(value));
     }
 
+    const logOut = () => {
+        setUser(null);
+        localStorage.removeItem('user');
+
+    }
+
     useEffect(() => {
         const localData = localStorage.getItem('user');
         if(localData) {
@@ -25,7 +32,7 @@ export const UserContextProvider = ({ children } : {children: JSX.Element}) => {
     }, []);
 
     return (
-        <UserContext.Provider value={{user: user, authorize: authorize, loading: loading, setLoading: setLoading}}>
+        <UserContext.Provider value={{user: user, authorize: authorize, logOut: logOut, loading: loading, setLoading: setLoading}}>
             {children}
         </UserContext.Provider>
     )
