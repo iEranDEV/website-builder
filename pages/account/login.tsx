@@ -1,14 +1,48 @@
 import StyledButton from "@/components/general/StyledButton";
-import { BiEnvelope, BiLockAlt } from 'react-icons/bi';
+import { BiEnvelope, BiError, BiLockAlt } from 'react-icons/bi';
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useState } from "react";
+import { UserContext } from "@/context/UserContext";
+import { useRouter } from "next/router";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState<string | null>(null);
+
+    const userContext = useContext(UserContext);
+    const router = useRouter();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if(!email) {
+            setError('E-mail input cannot be empty!');
+            return;
+        }
+
+        if(!password) {
+            setError('Password input cannot be empty!');
+            return;
+        }
+
+        await fetch('/api/account/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            })
+        }).then(async (result) => {
+            const data = await result.json();
+            if(data.success) {
+                userContext.authorize(data.data);
+                router.push('/');
+            } else {
+                setError(data.error);
+            }
+        }).catch(() => {
+            setError('Something went wrong. Try again.')
+        });
     }
 
     return (
@@ -20,6 +54,12 @@ function LoginPage() {
                 </div>
                 
                 <hr className="border w-full border-stone-300" />
+
+                {error && <div className="w-full bg-red-300 p-2 rounded-xl flex gap-4 items-center">
+                    <BiError className="h-6 w-6 text-red-700"></BiError>
+                    <p className="w-full text-sm text-red-700">{error}</p>
+                </div>}
+
 
                 <form onSubmit={handleSubmit} className='w-full flex flex-col gap-4 mt-8 items-center'>
 

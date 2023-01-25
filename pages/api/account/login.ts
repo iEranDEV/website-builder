@@ -1,12 +1,35 @@
 import connect from '@/lib/db'
+import User from '@/models/User';
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-	name: string
-}
-
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 	// Establish connection with database
 	await connect();
-	res.status(200).json({ name: 'John Doe' })
+
+	// Create user
+	if(req.method === 'POST') {
+		const data = JSON.parse(req.body);
+		const findByEmail = await User.findOne({ email: data.email })
+		if(findByEmail) {
+			if(data.password === findByEmail.password) {
+				res.status(201).json({
+					success: true,
+					data: {
+						email: findByEmail.email,
+						username: findByEmail.username
+					}
+				})
+			} else {
+				res.status(400).json({
+					success: false,
+					error: 'Wrong password!',
+				})
+			}
+		} else {
+			res.status(400).json({
+				success: false,
+				error: 'User with this email not found.'
+			})
+		}
+	}
 }
