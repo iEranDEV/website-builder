@@ -11,28 +11,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if(owner) {
         Project.find({ owner: owner }, (err: any, docs: any) => {
             if(!err) {
-                res.status(201).json({
+                res.json({
                     success: true,
                     data: docs,
-                })
+                });
+                res.status(200).end();
             } else {
-                res.status(400).json({
+                res.json({
                     success: false
-                })
+                });
+                res.status(400).end();
             }
         })
         return;
     } 
     Project.find((err: any, docs: any) => {
         if(!err) {
-            res.status(201).json({
+            res.json({
                 success: true,
                 data: docs,
-            })
+            });
+            res.status(200).end();
         } else {
-            res.status(400).json({
+            res.json({
                 success: false
-            })
+            });
+            res.status(400).end();
         }
     })
 }

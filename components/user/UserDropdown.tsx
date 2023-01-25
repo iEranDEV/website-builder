@@ -19,7 +19,7 @@ function UserDropdown() {
     }
 
     return (
-        <div className="flex gap-2 items-center select-none" >
+        <div className="flex gap-2 items-center select-none relative z-10" >
             <p className="text-stone-700">Logged as <span className="font-bold text-emerald-500">{user?.username}</span></p>
             <MdArrowDropDown onClick={() => setMenu(true)}  className="h-5 w-5 text-stone-700 cursor-pointer"></MdArrowDropDown>
 

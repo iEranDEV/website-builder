@@ -14,8 +14,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         owner: data.owner,
         createdAt: new Date(),
     });
-    res.status(201).json({
+    res.json({
         success: true,
         data: project
-    })
+    });
+    res.status(200).end();
 }
