@@ -14,10 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			if(data.password === findByEmail.password) {
 				res.status(201).json({
 					success: true,
-					data: {
-						email: findByEmail.email,
-						username: findByEmail.username
-					}
+					data: findByEmail
 				})
 			} else {
 				res.status(400).json({

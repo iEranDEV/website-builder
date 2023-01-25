@@ -1,4 +1,5 @@
 import AppWrapper from "@/components/general/AppWrapper";
+import ProjectsList from "@/components/project/ProjectsList";
 import UserDropdown from "@/components/user/UserDropdown";
 import { UserContext } from "@/context/UserContext"
 import Link from "next/link";
@@ -41,7 +42,7 @@ export default function Home() {
 
 				{/* Projects list */}
 				<div className="h-full w-full bg-stone-200">
-
+					<ProjectsList></ProjectsList>
 				</div>
 			</div>
 		</AppWrapper>

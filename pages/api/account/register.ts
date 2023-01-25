@@ -11,13 +11,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		const data = JSON.parse(req.body);
 		const findByEmail = await User.findOne({ email: data.email })
 		if(!findByEmail) {
-			const user = await User.create(data);
+			const user = await User.create({
+				email: data.email,
+				username: data.username,
+				password: data.password,
+				createdAt: new Date(),
+			});
 			res.status(201).json({
 				success: true,
-				data: {
-					email: user.email,
-					username: user.username
-				}
+				data: user
 			})
 		} else {
 			res.status(400).json({

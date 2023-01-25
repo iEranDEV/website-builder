@@ -13,6 +13,7 @@ const connection = {
 const connect = async () => {
     if(connection.isConnected) return;
 
+    mongoose.set('strictQuery', false);
     const db = await mongoose.connect(MONGODB_URI);
     console.log('connected!')
 
