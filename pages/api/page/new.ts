@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const page = await Page.create({
             name: data.name,
             structure: [],
+            project: data.project,
             createdAt: new Date(),
             modifiedAt: new Date(),
         });

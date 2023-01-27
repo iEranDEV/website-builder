@@ -19,12 +19,12 @@ function UserDropdown() {
     }
 
     return (
-        <div className="flex gap-2 items-center select-none relative z-10" >
+        <div className="flex gap-2 items-center select-none relative z-10 text-sm">
             <p className="text-stone-700">Logged as <span className="font-bold text-emerald-500">{user?.username}</span></p>
             <MdArrowDropDown onClick={() => setMenu(true)}  className="h-5 w-5 text-stone-700 cursor-pointer"></MdArrowDropDown>
 
             {/* Dropdown menu */}
-            {menu && <div onClick={() => setMenu(false)} className="w-screen h-screen fixed top-0 left-0 ">
+            {menu && <div onClick={() => setMenu(false)} className="w-screen h-screen fixed -top-3 left-0 ">
                 <div className="bg-stone-100 shadow-xl py-4 w-52 flex flex-col items-center gap-2 absolute right-2 rounded-xl top-14">
                     <Link href={'/'} className='w-full flex gap-4 items-center px-4 text-stone-700 hover:text-emerald-500'>
                         <FiHome className="h-4 w-4"></FiHome>

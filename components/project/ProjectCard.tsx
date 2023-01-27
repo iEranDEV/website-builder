@@ -28,7 +28,7 @@ function ProjectCard({project}: {project?: Project,}) {
         )
     } else {
         return (
-            <div className="w-full h-60 bg-stone-300/50 shadow rounded-xl hover:bg-stone-300 cursor-pointer flex justify-center items-center text-stone-400">
+            <div className="w-full h-60 bg-stone-200 shadow rounded-xl hover:bg-stone-200/80 cursor-pointer flex justify-center items-center text-stone-400">
                 <AiOutlinePlus className="w-10 h-10 "></AiOutlinePlus>
             </div>
         )

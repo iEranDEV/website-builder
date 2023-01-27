@@ -7,6 +7,7 @@ declare global {
         structure: Array<any>,
         createdAt: Date,
         modifiedAt: Date,
+        project: string
     }
 
     type User = {

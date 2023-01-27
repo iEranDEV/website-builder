@@ -5,6 +5,7 @@ const pageSchema = new Schema({
     structure: [Schema.Types.Mixed],
     createdAt: Date,
     modifiedAt: Date,
+    project: Schema.Types.ObjectId,
 })
 
 const Page = models.Page || model('Page', pageSchema);

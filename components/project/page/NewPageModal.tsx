@@ -6,7 +6,7 @@ import { FiX } from "react-icons/fi";
 import Modal from "../../general/Modal";
 import StyledButton from "../../general/StyledButton";
 
-function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage: Function, projectID: string}) {
+function NewPageModal({setMenu, syncData, projectID}: {setMenu: Function, syncData: Function, projectID: string}) {
     const [name, setName] = useState('');
 
     const userContext = useContext(UserContext);
@@ -25,7 +25,7 @@ function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage
         }).then(async (result) => {
             const data = await result.json();
             if(data.success) {
-                addPage(data.data as Page);
+                syncData();
             }
         })
     }
