@@ -13,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         description: data.description,
         owner: data.owner,
         createdAt: new Date(),
+        pages: [],
     });
     res.json({
         success: true,

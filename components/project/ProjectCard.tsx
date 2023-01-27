@@ -19,7 +19,7 @@ function ProjectCard({project}: {project?: Project,}) {
                             <span className="text-lg font-semibold">0</span>
                         </div>
 
-                        <Link href={'/project/' + project._id} className="w-40">
+                        <Link href={'/project/' + project._id + '/settings'} className="w-40">
                             <StyledButton text={'Edit project'}></StyledButton>
                         </Link>
                     </div>

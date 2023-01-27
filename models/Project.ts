@@ -8,6 +8,7 @@ const projectSchema = new Schema({
     name: String,
     description: String,
     createdAt: Date,
+    pages: [{ type: Schema.Types.ObjectId, ref: 'Page' }],
 })
 
 const Project = models.Project || model('Project', projectSchema);

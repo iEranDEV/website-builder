@@ -1,12 +1,12 @@
 export {};
 
 declare global {
-    type Project = {
+    type Page = {
         _id: string,
-        owner: string,
         name: string,
-        description: string,
-        createdAt: Date
+        structure: Array<any>,
+        createdAt: Date,
+        modifiedAt: Date,
     }
 
     type User = {
@@ -15,5 +15,14 @@ declare global {
         username: string,
         password: string,
         createdAt: Date
+    }
+
+    type Project = {
+        _id: string,
+        owner: string,
+        name: string,
+        description: string,
+        createdAt: Date,
+        pages: Array<Page>
     }
 }
