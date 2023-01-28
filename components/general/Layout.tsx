@@ -1,6 +1,6 @@
 import UserDropdown from "../user/UserDropdown";
 import AppWrapper from "./AppWrapper";
-import NavBar from "./NavBar";
+import NavBar from "./nav/NavBar";
 
 type LayoutProps = {
     children: JSX.Element,

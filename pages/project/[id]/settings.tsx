@@ -32,7 +32,9 @@ function ProjectSettings() {
 
     return (
         <ProjectWrapper project={project}>
-            <p>{id}</p>
+            <div className="m-4">
+                {id}
+            </div>
         </ProjectWrapper>
     )
 }
