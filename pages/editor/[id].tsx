@@ -37,22 +37,22 @@ function Editor() {
 
     const navBarItems = () => {
 		return [
-			<Link href={'/'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
+			<Link key={'back'} href={'/'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
                 <IoArrowBackOutline className="h-6 w-6"></IoArrowBackOutline>
                 <p className="md:hidden">All pages</p>
             </Link>,
 
-            <div className='flex gap-2 items-center text-stone-700 hover:te xt-emerald-500 cursor-pointer'>
+            <div key={'save'} className='flex gap-2 items-center text-stone-700 hover:te xt-emerald-500 cursor-pointer'>
                 <FiSave className="h-6 w-6"></FiSave>
                 <p className="md:hidden">Save</p>
             </div>,
             
-            <div className='flex gap-2 items-center text-stone-400 cursor-not-allowed'>
+            <div key={'preview'} className='flex gap-2 items-center text-stone-400 cursor-not-allowed'>
                 <FiEye className="h-6 w-6"></FiEye>
                 <p className="md:hidden">Preview</p>
             </div>,
 
-            <div className='flex gap-2 items-center text-stone-700 hover:text-red-400 cursor-pointer'>
+            <div key={'delete'} className='flex gap-2 items-center text-stone-700 hover:text-red-400 cursor-pointer'>
                 <FiTrash className="h-6 w-6"></FiTrash>
                 <p className="md:hidden">Delete project</p>
             </div>,
@@ -63,12 +63,19 @@ function Editor() {
         <Layout navbar={navBarItems()}>
             <div className="w-full h-full flex bg-stone-300">
                 <ComponentsPanel></ComponentsPanel>
-                <div className="p-4 w-full h-full overflow-auto relative">
-                    <div className="bg-red-500 h-10">
-
+                <div className="w-full h-full relative">
+                    <div className="absolute w-full h-full p-3 overflow-auto">
+                        {/*
+                            <div className="bg-red-500 w-full">
+                                {Array.from(Array(35)).map((e, i) => {
+                                    return <p key={i}>{i}</p>
+                                })}
+                            </div>
+                        */}
+                        context
                     </div>
                 </div>
-                <div className="h-full w-96 bg-blue-500"></div>
+                <div className="h-full w-60 min-w-[15rem] max-w-[15rem] bg-blue-500"></div>
             </div>
         </Layout>
     )
