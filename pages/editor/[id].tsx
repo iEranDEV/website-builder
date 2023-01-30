@@ -37,7 +37,7 @@ function Editor() {
 
     const navBarItems = () => {
 		return [
-			<Link key={'back'} href={'/'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
+			<Link key={'back'} href={'/project/' + page?.project + '/pages'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
                 <IoArrowBackOutline className="h-6 w-6"></IoArrowBackOutline>
                 <p className="md:hidden">All pages</p>
             </Link>,
