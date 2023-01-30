@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiEye, FiSave, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
+import structure from '@/test_structure.json';
+import ComponentsPanel from "@/components/editor/ComponentsPanel";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
@@ -13,14 +15,23 @@ function Editor() {
 
     useEffect(() => {
         if(id) {
-            fetch(`/api/page/${id}`).then(async (result) => {
+            /*fetch(`/api/page/${id}`).then(async (result) => {
                 const data = await result.json();
                 if(data.success) {
                     setPage(data.data as Page);
                 } 
             }).catch(() => {
                 router.push('/')
-            })
+            })*/
+            const newPage: Page = {
+                _id: crypto.randomUUID(),
+                name: "test_page",
+                structure: structure,
+                createdAt: new Date(),
+                modifiedAt: new Date(),
+                project: "63d4203d259ab3800fb01244"
+            }
+            setPage(newPage);
         }
     }, [id]);
 
@@ -31,7 +42,7 @@ function Editor() {
                 <p className="md:hidden">All pages</p>
             </Link>,
 
-            <div className='flex gap-2 items-center text-stone-700 hover:text-emerald-500 cursor-pointer'>
+            <div className='flex gap-2 items-center text-stone-700 hover:te xt-emerald-500 cursor-pointer'>
                 <FiSave className="h-6 w-6"></FiSave>
                 <p className="md:hidden">Save</p>
             </div>,
@@ -50,8 +61,14 @@ function Editor() {
 
     return (
         <Layout navbar={navBarItems()}>
-            <div className="w-full h-full flex bg-stone-300 ">
-                test
+            <div className="w-full h-full flex bg-stone-300">
+                <ComponentsPanel></ComponentsPanel>
+                <div className="p-4 w-full h-full overflow-auto relative">
+                    <div className="bg-red-500 h-10">
+
+                    </div>
+                </div>
+                <div className="h-full w-96 bg-blue-500"></div>
             </div>
         </Layout>
     )

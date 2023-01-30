@@ -26,4 +26,20 @@ declare global {
         createdAt: Date,
         pages: Array<Page>
     }
+
+    enum ElementType {
+        ROOT_ELEMENT,
+        SECTION,
+        TEXT,
+        IMAGE,
+        BOX
+    }
+
+    type EditorElement = {
+        id: string,
+        type: ElementType,
+        attributes: Map<string, string | number>,
+        parent: string | null,
+        children: string[],
+    }
 }

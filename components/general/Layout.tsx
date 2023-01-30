@@ -17,7 +17,7 @@ function Layout( {children, navbar}: LayoutProps ) {
                     <NavBar navbar={navbar}></NavBar>
                 </div>
                 <div className="w-full h-full flex flex-col">
-                    <div className="w-full bg-stone-100 px-2 border-b-2 border-stone-400 flex justify-between md:justify-end items-center py-2 relative z-10">
+                    <div className="w-full bg-stone-100 px-2 border-b border-stone-400 flex justify-between md:justify-end items-center py-2 relative z-10">
                         <div className="md:hidden">
                             <NavBar navbar={navbar}></NavBar>
                         </div>

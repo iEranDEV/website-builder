@@ -13,7 +13,7 @@ function NavBar({navbar}:{navbar: JSX.Element[] | null}) {
             </div>}
 
             {/* Content */}
-            <div className={`fixed w-screen md:w-auto h-screen transition-all md:border-r-2 border-stone-400 bg-stone-200 z-50 md:static ${menu ? 'top-0 left-0' : 'top-0 left-full'}`}>
+            <div className={`fixed w-screen md:w-auto h-screen transition-all md:border-r border-stone-400 bg-stone-100 z-50 md:static ${menu ? 'top-0 left-0' : 'top-0 left-full'}`}>
 
                 <div className="md:hidden w-full flex flex-col gap-4 p-3">
                     <FiX onClick={() => setMenu(false)} className="h-8 w-8"></FiX>
