@@ -8,27 +8,27 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
 
     const navBarItems = () => {
 		return [
-            <NavItem text="All projects" route="/">
+            <NavItem key={'projects'} text="All projects" route="/">
                 <IoArrowBackOutline className="h-6 w-6"></IoArrowBackOutline>
             </NavItem>,
 
-            <NavItem text="Settings" route={'/project/' + project?._id + '/settings'}>
+            <NavItem key={'settings'} text="Settings" route={'/project/' + project?._id + '/settings'}>
                 <FiSettings className="h-6 w-6"></FiSettings>
             </NavItem>,
 
-            <NavItem text="Pages" route={'/project/' + project?._id + '/pages'}>
+            <NavItem key={'pages'} text="Pages" route={'/project/' + project?._id + '/pages'}>
                 <FiBox className="h-6 w-6"></FiBox>
             </NavItem>,
 
-            <NavItem text="Preview" disabled>
+            <NavItem key={'preview'} text="Preview" disabled>
                 <FiEye className="h-6 w-6"></FiEye>
             </NavItem>,
 
-            <NavItem text="Generate" disabled>
+            <NavItem key={'generate'} text="Generate" disabled>
                 <FiCode className="h-6 w-6"></FiCode>
             </NavItem>,
 
-            <NavItem text="Delete project">
+            <NavItem key={'delete'} text="Delete project">
                 <FiTrash className="h-6 w-6"></FiTrash>
             </NavItem>,
         ]

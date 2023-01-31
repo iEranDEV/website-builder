@@ -6,9 +6,13 @@ import { FiEye, FiSave, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import structure from '@/test_structure.json';
 import ComponentsPanel from "@/components/editor/ComponentsPanel";
+import EditorElement from "@/components/editor/EditorElement";
+import { AiOutlinePlus } from "react-icons/ai";
+import ElementPanel from "@/components/editor/ElementPanel";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
+    const [clickedElement, setClickedElement] = useState<EditorElement | null>(null);
 
     const router = useRouter();
     const { id } = router.query;
@@ -26,7 +30,7 @@ function Editor() {
             const newPage: Page = {
                 _id: crypto.randomUUID(),
                 name: "test_page",
-                structure: structure,
+                structure: JSON.parse(JSON.stringify(structure)) as EditorElement[],
                 createdAt: new Date(),
                 modifiedAt: new Date(),
                 project: "63d4203d259ab3800fb01244"
@@ -42,7 +46,7 @@ function Editor() {
                 <p className="md:hidden">All pages</p>
             </Link>,
 
-            <div key={'save'} className='flex gap-2 items-center text-stone-700 hover:te xt-emerald-500 cursor-pointer'>
+            <div key={'save'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500 cursor-pointer'>
                 <FiSave className="h-6 w-6"></FiSave>
                 <p className="md:hidden">Save</p>
             </div>,
@@ -72,10 +76,13 @@ function Editor() {
                                 })}
                             </div>
                         */}
-                        context
+                        <EditorElement element={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')} structure={page?.structure} setClickedElement={setClickedElement}></EditorElement>
+                        <div className="w-full h-40 mt-4 bg-stone-200 shadow rounded-xl hover:bg-stone-200/80 cursor-pointer flex justify-center items-center text-stone-400">
+                            <AiOutlinePlus className="w-10 h-10 "></AiOutlinePlus>
+                        </div>
                     </div>
                 </div>
-                <div className="h-full w-60 min-w-[15rem] max-w-[15rem] bg-blue-500"></div>
+                <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
             </div>
         </Layout>
     )

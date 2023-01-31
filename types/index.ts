@@ -4,7 +4,7 @@ declare global {
     type Page = {
         _id: string,
         name: string,
-        structure: Array<any>,
+        structure: Array<EditorElement>,
         createdAt: Date,
         modifiedAt: Date,
         project: string
@@ -27,18 +27,16 @@ declare global {
         pages: Array<Page>
     }
 
-    enum ElementType {
-        ROOT_ELEMENT,
-        SECTION,
-        TEXT,
-        IMAGE,
-        BOX
-    }
-
     type EditorElement = {
         id: string,
-        type: ElementType,
-        attributes: Map<string, string | number>,
+        type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'IMAGE' | 'CONTAINER',
+        content: '',
+        attributes: {
+            width: string,
+            height: string,
+            backgroundColor: string,
+            color: string,
+        },
         parent: string | null,
         children: string[],
     }

@@ -3,7 +3,10 @@
         "id": "daofuoaw8iftgaf",
         "type": "ROOT_ELEMENT",
         "attributes": {
-
+            "width": "100%",
+            "height": "",
+            "backgroundColor": "#FFFFFF",
+            "color": "#555555"
         },
         "parent": null,
         "children": ["oafyawifgasfaw"]
@@ -11,8 +14,12 @@
     {
         "id": "oafyawifgasfaw",
         "type": "SECTION",
+        "content": "test_content",
         "attributes": {
-            
+            "width": "100%",
+            "height": "200px",
+            "backgroundColor": "#AAA",
+            "color": "#555555"
         },
         "parent": "daofuoaw8iftgaf",
         "children": []

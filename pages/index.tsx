@@ -7,19 +7,19 @@ export default function Home() {
 
 	const navBarItems = () => {
 		return [
-			<NavItem text="Projects" route={'/'}>
+			<NavItem key={'projects'} text="Projects" route={'/'}>
                 <FiHome className="h-6 w-6"></FiHome>
             </NavItem>,
 
-			<NavItem text="Account">
+			<NavItem key={'account'} text="Account">
                 <FiUser className="h-6 w-6"></FiUser>
             </NavItem>,
 
-			<NavItem text="Settings">
+			<NavItem key={'settings'} text="Settings">
                 <FiSettings className="h-6 w-6"></FiSettings>
             </NavItem>,
 
-			<NavItem text="Teams" disabled>
+			<NavItem key={'teams'} text="Teams" disabled>
                 <FiUsers className="h-6 w-6 text-stone-400"></FiUsers>
             </NavItem>,
 		]
@@ -27,7 +27,7 @@ export default function Home() {
 
 	return (
 		<Layout navbar={navBarItems()}>
-			<div className="w-full h-full p-4">
+			<div className="w-full h-full">
 				<ProjectsList></ProjectsList>
 			</div>
 		</Layout>
