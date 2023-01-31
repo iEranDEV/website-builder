@@ -9,10 +9,12 @@ import ComponentsPanel from "@/components/editor/ComponentsPanel";
 import EditorElement from "@/components/editor/EditorElement";
 import { AiOutlinePlus } from "react-icons/ai";
 import ElementPanel from "@/components/editor/ElementPanel";
+import { StructureContext } from "@/context/StructureContext";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
     const [clickedElement, setClickedElement] = useState<EditorElement | null>(null);
+    const [dragElement, setDragElement] = useState('');
 
     const router = useRouter();
     const { id } = router.query;
@@ -39,6 +41,27 @@ function Editor() {
         }
     }, [id]);
 
+    // Add new section to page
+    const addSection = () => {
+        const newSection: EditorElement = {
+            id: crypto.randomUUID(),
+            type: "SECTION",
+            content: "",
+            attributes: {
+                width: '100%',
+                height: '100px',
+                backgroundColor: '#FFFFFF',
+                color: '#FFFFFF'
+            },
+            parent: page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string,
+            children: []
+        }
+        const newPage = structuredClone(page);
+        newPage?.structure.push(newSection);
+        newPage?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.children.push(newSection.id);
+        setPage(newPage);
+    }
+
     const navBarItems = () => {
 		return [
 			<Link key={'back'} href={'/project/' + page?.project + '/pages'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
@@ -63,27 +86,38 @@ function Editor() {
 		]
 	}
 
+    const addElement = (element: EditorElement) => {
+
+    }
+
+    const updateElement = (element: EditorElement) => {
+        
+    }
+
+    const deleteElement = (element: EditorElement) => {
+        
+    }
+
     return (
         <Layout navbar={navBarItems()}>
-            <div className="w-full h-full flex bg-stone-300">
-                <ComponentsPanel></ComponentsPanel>
-                <div className="w-full h-full relative">
-                    <div className="absolute w-full h-full p-3 overflow-auto">
-                        {/*
-                            <div className="bg-red-500 w-full">
-                                {Array.from(Array(35)).map((e, i) => {
-                                    return <p key={i}>{i}</p>
-                                })}
+            <>
+                {page && <StructureContext.Provider value={{structure: page.structure, addElement: addElement, updateElement: updateElement, deleteElement: deleteElement, dragElement: dragElement, setDragElement: setDragElement}}>
+                    <div className="w-full h-full flex bg-stone-300">
+                        <ComponentsPanel></ComponentsPanel>
+                        <div className="w-full h-full relative">
+                            <div className="absolute w-full h-full p-3 overflow-auto">
+                                <EditorElement elementID={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string} setClickedElement={setClickedElement}></EditorElement>
+                                
+                                {/* New section button */}
+                                <div onClick={addSection} className="w-full h-40 mt-4 bg-stone-200 shadow rounded-xl hover:bg-stone-200/80 cursor-pointer flex justify-center items-center text-stone-400">
+                                    <AiOutlinePlus className="w-10 h-10 "></AiOutlinePlus>
+                                </div>
                             </div>
-                        */}
-                        <EditorElement element={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')} structure={page?.structure} setClickedElement={setClickedElement}></EditorElement>
-                        <div className="w-full h-40 mt-4 bg-stone-200 shadow rounded-xl hover:bg-stone-200/80 cursor-pointer flex justify-center items-center text-stone-400">
-                            <AiOutlinePlus className="w-10 h-10 "></AiOutlinePlus>
                         </div>
+                        <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
                     </div>
-                </div>
-                <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
-            </div>
+                </StructureContext.Provider>}
+            </>
         </Layout>
     )
 
