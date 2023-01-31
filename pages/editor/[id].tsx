@@ -1,5 +1,4 @@
 import Layout from "@/components/general/Layout";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FiEye, FiPlus, FiSave, FiTrash } from "react-icons/fi";
@@ -117,7 +116,7 @@ function Editor() {
                                 <EditorElement clickedElement={clickedElement} elementID={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string} setClickedElement={setClickedElement}></EditorElement>
                             </div>
                         </div>
-                        <ElementPanel clickedElement={clickedElement}></ElementPanel>
+                        <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
                     </div>
                 </StructureContext.Provider>}
             </>
