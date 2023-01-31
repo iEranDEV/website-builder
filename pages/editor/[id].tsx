@@ -2,18 +2,18 @@ import Layout from "@/components/general/Layout";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { FiEye, FiSave, FiTrash } from "react-icons/fi";
+import { FiEye, FiPlus, FiSave, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
-import structure from '@/test_structure.json';
+import structureTest from '@/test_structure.json';
 import ComponentsPanel from "@/components/editor/ComponentsPanel";
 import EditorElement from "@/components/editor/EditorElement";
-import { AiOutlinePlus } from "react-icons/ai";
 import ElementPanel from "@/components/editor/ElementPanel";
 import { StructureContext } from "@/context/StructureContext";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
-    const [clickedElement, setClickedElement] = useState<EditorElement | null>(null);
+    const [structure, setStructure] = useState(Array<EditorElement>());
+    const [clickedElement, setClickedElement] = useState<string | null>(null);
     const [dragElement, setDragElement] = useState('');
 
     const router = useRouter();
@@ -32,11 +32,12 @@ function Editor() {
             const newPage: Page = {
                 _id: crypto.randomUUID(),
                 name: "test_page",
-                structure: JSON.parse(JSON.stringify(structure)) as EditorElement[],
+                structure: JSON.parse(JSON.stringify(structureTest)) as EditorElement[],
                 createdAt: new Date(),
                 modifiedAt: new Date(),
                 project: "63d4203d259ab3800fb01244"
             }
+            setStructure(structuredClone(newPage.structure));
             setPage(newPage);
         }
     }, [id]);
@@ -49,17 +50,14 @@ function Editor() {
             content: "",
             attributes: {
                 width: '100%',
-                height: '100px',
+                height: '200px',
                 backgroundColor: '#FFFFFF',
                 color: '#FFFFFF'
             },
-            parent: page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string,
+            parent: structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string,
             children: []
         }
-        const newPage = structuredClone(page);
-        newPage?.structure.push(newSection);
-        newPage?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.children.push(newSection.id);
-        setPage(newPage);
+        addElement(newSection);
     }
 
     const navBarItems = () => {
@@ -83,38 +81,46 @@ function Editor() {
                 <FiTrash className="h-6 w-6"></FiTrash>
                 <p className="md:hidden">Delete project</p>
             </div>,
+
+            <div onClick={addSection} key={'add_section'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500 cursor-pointer'>
+                <FiPlus className="h-6 w-6"></FiPlus>
+                <p className="md:hidden">Add section</p>
+            </div>,
 		]
 	}
 
     const addElement = (element: EditorElement) => {
-
+        const newStructure = structuredClone(structure);
+        newStructure.push(element);
+        newStructure.find((item) => item.id === element.parent)?.children.push(element.id);
+        setStructure(newStructure);
     }
 
     const updateElement = (element: EditorElement) => {
-        
+        const newStructure = structuredClone(structure);
+        const index = newStructure.findIndex((item) => item.id === element.id);
+        newStructure[index] = element;
+        setStructure(newStructure);
     }
 
     const deleteElement = (element: EditorElement) => {
-        
+        const newStructure = structuredClone(structure);
+        newStructure.splice(newStructure.findIndex((item) => item.id === element.id), 1);
+        setStructure(newStructure);
     }
 
     return (
         <Layout navbar={navBarItems()}>
             <>
-                {page && <StructureContext.Provider value={{structure: page.structure, addElement: addElement, updateElement: updateElement, deleteElement: deleteElement, dragElement: dragElement, setDragElement: setDragElement}}>
+                {page && <StructureContext.Provider value={{structure: structure, addElement: addElement, updateElement: updateElement, deleteElement: deleteElement, dragElement: dragElement, setDragElement: setDragElement}}>
                     <div className="w-full h-full flex bg-stone-300">
                         <ComponentsPanel></ComponentsPanel>
                         <div className="w-full h-full relative">
                             <div className="absolute w-full h-full p-3 overflow-auto">
-                                <EditorElement elementID={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string} setClickedElement={setClickedElement}></EditorElement>
-                                
-                                {/* New section button */}
-                                <div onClick={addSection} className="w-full h-40 mt-4 bg-stone-200 shadow rounded-xl hover:bg-stone-200/80 cursor-pointer flex justify-center items-center text-stone-400">
-                                    <AiOutlinePlus className="w-10 h-10 "></AiOutlinePlus>
-                                </div>
+                                <EditorElement clickedElement={clickedElement} elementID={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string} setClickedElement={setClickedElement}></EditorElement>
                             </div>
                         </div>
-                        <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
+                        <ElementPanel clickedElement={clickedElement}></ElementPanel>
                     </div>
                 </StructureContext.Provider>}
             </>

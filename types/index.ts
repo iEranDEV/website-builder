@@ -32,10 +32,13 @@ declare global {
         type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'IMAGE' | 'CONTAINER',
         content: '',
         attributes: {
-            width?: string,
-            height?: string,
-            backgroundColor?: string,
+            width: string,
+            height: string,
+            backgroundColor: string,
             color?: string,
+            position?: any,
+            top?: string,
+            left?: string
         },
         parent: string | null,
         children: string[],

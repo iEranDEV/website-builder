@@ -7,6 +7,7 @@
 
 * {
     font-family: 'Lato', sans-serif;
+    @apply select-none;
 }
 
 .mono {
@@ -16,6 +17,7 @@
 
 ::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 }
 
 ::-webkit-scrollbar-track {
