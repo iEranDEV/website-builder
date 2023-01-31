@@ -9,6 +9,7 @@ import ComponentsPanel from "@/components/editor/ComponentsPanel";
 import EditorElement from "@/components/editor/EditorElement";
 import ElementPanel from "@/components/editor/ElementPanel";
 import { StructureContext } from "@/context/StructureContext";
+import NavItem from "@/components/general/nav/NavItem";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
@@ -52,7 +53,8 @@ function Editor() {
                 width: '100%',
                 height: '200px',
                 backgroundColor: '#FFFFFF',
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                position: "relative"
             },
             parent: structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string,
             children: []
@@ -62,30 +64,25 @@ function Editor() {
 
     const navBarItems = () => {
 		return [
-			<Link key={'back'} href={'/project/' + page?.project + '/pages'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500'>
+            <NavItem key={'back'} text="All pages" route={'/project/' + page?.project + '/pages'}>
                 <IoArrowBackOutline className="h-6 w-6"></IoArrowBackOutline>
-                <p className="md:hidden">All pages</p>
-            </Link>,
-
-            <div key={'save'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500 cursor-pointer'>
-                <FiSave className="h-6 w-6"></FiSave>
-                <p className="md:hidden">Save</p>
-            </div>,
+            </NavItem>,
             
-            <div key={'preview'} className='flex gap-2 items-center text-stone-400 cursor-not-allowed'>
+            <NavItem key={'save'} text="Save">
+                <FiSave className="h-6 w-6"></FiSave>
+            </NavItem>,
+
+            <NavItem key={'preview'} text="Preview">
                 <FiEye className="h-6 w-6"></FiEye>
-                <p className="md:hidden">Preview</p>
-            </div>,
+            </NavItem>,
 
-            <div key={'delete'} className='flex gap-2 items-center text-stone-700 hover:text-red-400 cursor-pointer'>
+            <NavItem key={'delete'} text="Delete page" disabled>
                 <FiTrash className="h-6 w-6"></FiTrash>
-                <p className="md:hidden">Delete project</p>
-            </div>,
+            </NavItem>,
 
-            <div onClick={addSection} key={'add_section'} className='flex gap-2 items-center text-stone-700 hover:text-emerald-500 cursor-pointer'>
+            <NavItem onClick={addSection} key={'add_section'} text="Add section">
                 <FiPlus className="h-6 w-6"></FiPlus>
-                <p className="md:hidden">Add section</p>
-            </div>,
+            </NavItem>,
 		]
 	}
 

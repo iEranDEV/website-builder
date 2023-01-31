@@ -20,7 +20,6 @@
             "height": "200px",
             "backgroundColor": "#AAA",
             "color": "#555555",
-            "overflow": "hidden",
             "position": "relative"
         },
         "parent": "daofuoaw8iftgaf",

@@ -27,19 +27,21 @@ declare global {
         pages: Array<Page>
     }
 
+    type ElementAttributes = {
+        width: string,
+        height: string,
+        backgroundColor: string,
+        color?: string,
+        position?: any,
+        top?: string,
+        left?: string
+    }
+
     type EditorElement = {
         id: string,
         type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'IMAGE' | 'CONTAINER',
         content: '',
-        attributes: {
-            width: string,
-            height: string,
-            backgroundColor: string,
-            color?: string,
-            position?: any,
-            top?: string,
-            left?: string
-        },
+        attributes: ElementAttributes,
         parent: string | null,
         children: string[],
     }
