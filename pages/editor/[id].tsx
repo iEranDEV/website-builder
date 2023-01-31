@@ -15,6 +15,7 @@ function Editor() {
     const [structure, setStructure] = useState(Array<EditorElement>());
     const [clickedElement, setClickedElement] = useState<string | null>(null);
     const [dragElement, setDragElement] = useState('');
+    const [movedElement, setMovedElement] = useState({id: '', posX: 0, posY: 0});
 
     const router = useRouter();
     const { id } = router.query;
@@ -108,7 +109,14 @@ function Editor() {
     return (
         <Layout navbar={navBarItems()}>
             <>
-                {page && <StructureContext.Provider value={{structure: structure, addElement: addElement, updateElement: updateElement, deleteElement: deleteElement, dragElement: dragElement, setDragElement: setDragElement}}>
+                {page && <StructureContext.Provider value={{
+                        structure: structure, 
+                        addElement: addElement, 
+                        updateElement: updateElement, 
+                        deleteElement: deleteElement, 
+                        dragElement: dragElement, setDragElement: setDragElement, 
+                        movedElement: movedElement, setMovedElement: setMovedElement
+                    }}>
                     <div className="w-full h-full flex bg-stone-300">
                         <ComponentsPanel></ComponentsPanel>
                         <div className="w-full h-full relative">

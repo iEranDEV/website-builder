@@ -24,7 +24,7 @@ function NavItem({ children, text, disabled, route, onClick }: NavItemProps) {
                 </div>
             </Link>
         :
-            <div onClick={() => onClick && onClick()} key={text} className={`flex group gap-2 relative items-center ${disabled ? 'text-stone-400 cursor-not-allowed' : 'text-stone-700 hover:text-emerald-500'}`}>
+            <div onClick={() => onClick && onClick()} key={text} className={`flex group gap-2 cursor-pointer relative items-center ${disabled ? 'text-stone-400 cursor-not-allowed' : 'text-stone-700 hover:text-emerald-500'}`}>
                 {children}
                 <p className="md:hidden">{text}</p>
 

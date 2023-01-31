@@ -7,4 +7,6 @@ export const StructureContext = createContext({
     deleteElement: (element: EditorElement) => {},
     dragElement: '',
     setDragElement: (value: string) => {},
+    movedElement: {id: '', posX: 0, posY: 0},
+    setMovedElement: (value: {id: string, posX: number, posY: number}) => {}
 })
