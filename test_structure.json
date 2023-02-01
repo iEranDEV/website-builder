@@ -2,6 +2,7 @@
     {
         "id": "daofuoaw8iftgaf",
         "type": "ROOT_ELEMENT",
+        "name": "root",
         "attributes": {
             "width": "100%",
             "height": "",
@@ -14,6 +15,7 @@
     {
         "id": "oafyawifgasfaw",
         "type": "SECTION",
+        "name": "Section #1",
         "content": "",
         "attributes": {
             "width": "100%",

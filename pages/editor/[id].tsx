@@ -13,7 +13,7 @@ import NavItem from "@/components/general/nav/NavItem";
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
     const [structure, setStructure] = useState(Array<EditorElement>());
-    const [clickedElement, setClickedElement] = useState<string | null>(null);
+    const [clickedElement, setClickedElement] = useState('');
     const [dragElement, setDragElement] = useState('');
     const [movedElement, setMovedElement] = useState({id: '', posX: 0, posY: 0});
 
@@ -48,6 +48,7 @@ function Editor() {
         const newSection: EditorElement = {
             id: crypto.randomUUID(),
             type: "SECTION",
+            name: 'Section #' + (structure.filter((item) => item.type === 'SECTION').length + 1),
             content: "",
             attributes: {
                 width: '100%',
@@ -88,6 +89,7 @@ function Editor() {
 
     const addElement = (element: EditorElement) => {
         const newStructure = structuredClone(structure);
+        element.name = (element.type.charAt(0) + element.type.slice(1).toLowerCase()) + ' #' + (structure.filter((item) => item.type === element.type).length + 1)
         newStructure.push(element);
         newStructure.find((item) => item.id === element.parent)?.children.push(element.id);
         setStructure(newStructure);
@@ -115,7 +117,9 @@ function Editor() {
                         updateElement: updateElement, 
                         deleteElement: deleteElement, 
                         dragElement: dragElement, setDragElement: setDragElement, 
-                        movedElement: movedElement, setMovedElement: setMovedElement
+                        movedElement: movedElement, setMovedElement: setMovedElement,
+                        clickedElement: clickedElement,
+                        setClickedElement: setClickedElement,
                     }}>
                     <div className="w-full h-full flex bg-stone-300">
                         <ComponentsPanel></ComponentsPanel>
@@ -124,7 +128,7 @@ function Editor() {
                                 <EditorElement clickedElement={clickedElement} elementID={page?.structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string} setClickedElement={setClickedElement}></EditorElement>
                             </div>
                         </div>
-                        <ElementPanel clickedElement={clickedElement} setClickedElement={setClickedElement}></ElementPanel>
+                        <ElementPanel></ElementPanel>
                     </div>
                 </StructureContext.Provider>}
             </>

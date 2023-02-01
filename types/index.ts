@@ -39,6 +39,7 @@ declare global {
 
     type EditorElement = {
         id: string,
+        name: string,
         type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'IMAGE' | 'CONTAINER',
         content: '',
         attributes: ElementAttributes,

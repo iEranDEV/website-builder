@@ -8,5 +8,7 @@ export const StructureContext = createContext({
     dragElement: '',
     setDragElement: (value: string) => {},
     movedElement: {id: '', posX: 0, posY: 0},
-    setMovedElement: (value: {id: string, posX: number, posY: number}) => {}
+    setMovedElement: (value: {id: string, posX: number, posY: number}) => {},
+    clickedElement: '',
+    setClickedElement: (element: string) => {}
 })

@@ -6,22 +6,23 @@ import { FiTrash } from "react-icons/fi";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import { TbAxisX, TbAxisY} from 'react-icons/tb'
 
-function ElementPanel({clickedElement, setClickedElement} : {clickedElement: string | null, setClickedElement: Function}) {
+function ElementPanel() {
     const [element, setElement] = useState<EditorElement | null>(null);
     const [attributes, setAttributes] = useState<ElementAttributes | null>(null);
 
-    const structure = useContext(StructureContext);
+    const structureContext = useContext(StructureContext);
+    const structure = structureContext.structure;
 
     // Refs
     const backgroundColorRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
-        const val = structure.structure.find((item) => item.id === clickedElement);
+        const val = structure.find((item) => item.id === structureContext.clickedElement);
         if(val) {
             setElement(val);
             setAttributes(val.attributes);
         }
-    }, [structure.structure.find((item) => item.id === clickedElement)]);
+    }, [structure.find((item) => item.id === structureContext.clickedElement)]);
 
     const handleUpdate = (val: ElementAttributes) => {
         setAttributes(val);
@@ -29,14 +30,14 @@ function ElementPanel({clickedElement, setClickedElement} : {clickedElement: str
             const newElement = structuredClone(element);
             newElement.attributes = val;
             setElement(newElement);
-            structure.updateElement(newElement);
+            structureContext.updateElement(newElement);
         }
     }
 
     const handleDelete = () => {
         if(element) {
-            structure.deleteElement(element);
-            setClickedElement(null);
+            structureContext.deleteElement(element);
+            structureContext.setClickedElement('');
             setElement(null);
             setAttributes(null);
         }
