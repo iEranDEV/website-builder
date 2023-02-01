@@ -1,7 +1,9 @@
 import { StructureContext } from "@/context/StructureContext";
 import { useContext, useEffect, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
-import { BsCheck } from 'react-icons/bs'
+import { TbNewSection } from "react-icons/tb";
+import { FiSquare } from "react-icons/fi";
+import { BiText } from "react-icons/bi";
 
 function StructureTreeElement({ elementID }: {elementID: string}) {
     const [element, setElement] = useState<EditorElement | null>(null);
@@ -14,6 +16,17 @@ function StructureTreeElement({ elementID }: {elementID: string}) {
         const val = structure.find((item) => item.id === elementID);
         if(val) setElement(val);
     }, [structure.find((item) => item.id === elementID)]);
+
+    const renderIcon = () => {
+        switch(element?.type) {
+            case 'SECTION':
+                return <TbNewSection></TbNewSection>;
+            case 'CONTAINER':
+                return <FiSquare></FiSquare>;
+            case 'TEXT':
+                return <BiText></BiText>    
+        }
+    }
 
     return (
         <div className={`w-full`}>
@@ -29,8 +42,8 @@ function StructureTreeElement({ elementID }: {elementID: string}) {
                     <span className="h-4 w-4"></span>
                 }
                 {element && <p className="flex gap-2 items-center" onClick={() => structureContext.setClickedElement(elementID)}>
+                    {renderIcon()}
                     <span>{element?.name}</span>
-                    {structureContext.clickedElement === elementID && <BsCheck className="text-emerald-500 h-5 w-5"></BsCheck>}
                 </p>}
             </div>
             {expanded && <div className="pl-2">

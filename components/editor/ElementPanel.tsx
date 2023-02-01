@@ -1,8 +1,9 @@
 import { StructureContext } from "@/context/StructureContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineColumnWidth, AiOutlineColumnHeight } from "react-icons/ai";
-import { BiColorFill, BiRename } from "react-icons/bi";
+import { BiBold, BiColorFill, BiItalic, BiRename, BiUnderline } from "react-icons/bi";
 import { FiTrash } from "react-icons/fi";
+import { MdContentPaste } from "react-icons/md";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import { TbAxisX, TbAxisY} from 'react-icons/tb'
 
@@ -15,6 +16,7 @@ function ElementPanel() {
 
     // Refs
     const backgroundColorRef = useRef<HTMLInputElement>(null);
+    const textColorRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const val = structure.find((item) => item.id === structureContext.clickedElement);
@@ -38,6 +40,14 @@ function ElementPanel() {
         if(element) {
             const newElement = structuredClone(element);
             newElement.name = val;
+            structureContext.updateElement(newElement);
+        }
+    }
+
+    const updateContent = (val: string) => {
+        if(element) {
+            const newElement = structuredClone(element);
+            newElement.content = val;
             structureContext.updateElement(newElement);
         }
     }
@@ -113,7 +123,48 @@ function ElementPanel() {
                         </div>
                     }
 
-                    <div className="flex flex-col gap-2">
+                    {/* Text attributes */}
+                    {element.type === 'TEXT' && <div className="flex flex-col gap-2">
+                        <p className="mono font-bold text-stone-400">Text</p>
+
+                        {/* Text content */}
+                        <div className="flex items-center gap-2 w-full">
+                            <MdContentPaste className="h-6 w-6"></MdContentPaste>
+                            <textarea cols={10} rows={3} value={element.content}
+                                onChange={(e) => updateContent(e.target.value)}
+                                className="w-full element-input"
+                            />
+                        </div>
+
+                        {/* Text color */}
+                        <div className="flex items-center gap-2 w-full">
+                            <BiColorFill className="h-6 w-6"></BiColorFill>
+                            <input ref={textColorRef} value={attributes.color}
+                                onChange={(e) => handleUpdate({...attributes, color: e.target.value})}
+                                type="color" className="w-0 h-0 invisible" 
+                            />
+                            <div onClick={() => textColorRef.current?.click()} className="w-6 h-6 rounded-lg border aspect-square cursor-pointer" style={{backgroundColor: attributes.color}}></div>
+                            <input type="text" value={attributes.color}
+                                onChange={(e) => handleUpdate({...attributes, color: e.target.value})}
+                                className="w-full element-input"
+                            />
+                        </div>
+
+                        {/* Text attributes */}
+                        <div className="flex items-center gap-2 w-full">
+                            <button className="h-7 w-7 border border-stone-700 rounded flex justify-center items-center text-stone-700 hover:text-stone-500 hover:border-stone-500">
+                                <BiBold className="h-5 w-5"></BiBold>
+                            </button>
+                            <button className="h-7 w-7 border border-stone-700 rounded flex justify-center items-center text-stone-700 hover:text-stone-500 hover:border-stone-500">
+                                <BiItalic className="h-5 w-5"></BiItalic>
+                            </button>
+                            <button className="h-7 w-7 border border-stone-700 rounded flex justify-center items-center text-stone-700 hover:text-stone-500 hover:border-stone-500">
+                                <BiUnderline className="h-5 w-5"></BiUnderline>
+                            </button>
+                        </div>
+                    </div>}
+
+                    {element.type !== 'TEXT' && <div className="flex flex-col gap-2">
                         <p className="mono font-bold text-stone-400">Background</p>
 
                         {/* Background color */}
@@ -129,7 +180,7 @@ function ElementPanel() {
                                 className="w-full element-input"
                             />
                         </div>
-                    </div>
+                    </div>}
 
                     {/* Delete element */}
                     <div className="w-full justiy-center py-2">

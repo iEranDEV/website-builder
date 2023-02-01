@@ -2,12 +2,27 @@
     "container": {
         "id": "",
         "type": "CONTAINER",
-        "content": "",
         "attributes": {
             "width": "100px",
             "height": "100px",
             "backgroundColor": "#FF0000",
             "color": "#FFFFFF",
+            "position": "absolute",
+            "top": "0px",
+            "left": "0px"
+        },
+        "parent": "",
+        "children": []
+    },
+    "text": {
+        "id": "",
+        "type": "TEXT",
+        "content": "Type something",
+        "attributes": {
+            "width": "100px",
+            "height": "50px",
+            "backgroundColor": "transparent",
+            "color": "#000000",
             "position": "absolute",
             "top": "0px",
             "left": "0px"

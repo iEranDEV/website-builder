@@ -101,7 +101,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
             onClick={(e) => handleClick(e)} 
             id={'element_' + elementID}
             style={element?.attributes} 
-            className={`outline-2 ${element?.type != 'ROOT_ELEMENT' && element?.type != 'SECTION' && 'cursor-move'} ${element?.type != 'ROOT_ELEMENT' && 'hover:outline outline-stone-500 hover:z-50'} ${clickedElement === element?.id && 'outline !outline-emerald-500 z-50'}`}
+            className={`whitespace-pre outline-2 ${element?.type != 'ROOT_ELEMENT' && element?.type != 'SECTION' && 'cursor-move'} ${element?.type != 'ROOT_ELEMENT' && 'hover:outline outline-stone-500 hover:z-50'} ${clickedElement === element?.id && 'outline !outline-emerald-500 z-50'}`}
         >
             {<div onDragEnter={() => handleDragStatus(true)} 
                 onDragLeave={() => handleDragStatus(false)}

@@ -54,6 +54,8 @@ export const UserContextProvider = ({ children } : {children: JSX.Element}) => {
                 });
             }
             syncData();
+        } else {
+            router.push('/account/login');
         }
     }, []);
 
