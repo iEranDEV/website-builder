@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { BiText } from "react-icons/bi";
 import { FiImage, FiSquare } from "react-icons/fi";
 import ComponentsItem from "./ComponentsItem";
-import PanelElement from "./PanelElement";
+import StructureTreeElement from "./StructureTreeElement";
 
 function ComponentsPanel() {
 
@@ -28,10 +28,10 @@ function ComponentsPanel() {
                 <p className="p-2 mono text-sm font-bold text-stone-400">Drag and drop items to add them to your page</p>
                 {items}
             </div>
-            <div className="w-full h-1/2 flex flex-col py-2">
+            <div className="w-full h-1/2 flex flex-col p-2">
                 {structure.filter((item) => item.type === 'SECTION').map((item) => {
                     return (
-                        <PanelElement key={item.id} elementID={item.id}></PanelElement>
+                        <StructureTreeElement key={item.id} elementID={item.id}></StructureTreeElement>
                     )
                 })}
             </div>

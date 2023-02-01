@@ -1,7 +1,7 @@
 import { StructureContext } from "@/context/StructureContext";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineColumnWidth, AiOutlineColumnHeight } from "react-icons/ai";
-import { BiColorFill } from "react-icons/bi";
+import { BiColorFill, BiRename } from "react-icons/bi";
 import { FiTrash } from "react-icons/fi";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import { TbAxisX, TbAxisY} from 'react-icons/tb'
@@ -34,6 +34,14 @@ function ElementPanel() {
         }
     }
 
+    const updateName = (val: string) => {
+        if(element) {
+            const newElement = structuredClone(element);
+            newElement.name = val;
+            structureContext.updateElement(newElement);
+        }
+    }
+
     const handleDelete = () => {
         if(element) {
             structureContext.deleteElement(element);
@@ -46,7 +54,20 @@ function ElementPanel() {
     return (
         <div className={`w-96 p-2 h-full bg-stone-200 border-l border-stone-400 overflow-x-auto flex flex-col gap-2`}>
             {element && attributes ?
-                <div className="w-full h-full overflow-y-auto flex flex-col divide-stone-300 text-stone-600">
+                <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-stone-300 text-stone-600">
+
+                    {/* Element name */}
+                    <div className="flex flex-col gap-2">
+                        <p className="mono font-bold text-stone-400">Name</p>
+
+                        <div className="flex items-center gap-2 w-full">
+                            <BiRename className="h-6 w-6"></BiRename>
+                            <input type="text" value={element.name}
+                                onChange={(e) => updateName(e.target.value)}
+                                className="w-full element-input"
+                            />
+                        </div>
+                    </div>
 
                     {/* Dimensions */}
                     {element.type !== 'SECTION' &&
@@ -89,7 +110,6 @@ function ElementPanel() {
                                     className="w-48 element-input"
                                 />
                             </div>
-                            <hr className="my-4" />
                         </div>
                     }
 
@@ -110,8 +130,6 @@ function ElementPanel() {
                             />
                         </div>
                     </div>
-
-                    <hr className="my-4" />
 
                     {/* Delete element */}
                     <div className="w-full justiy-center py-2">
