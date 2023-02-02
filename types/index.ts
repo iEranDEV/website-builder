@@ -49,4 +49,12 @@ declare global {
         parent: string | null,
         children: string[],
     }
+
+    type ElementSettingsProps = {
+        element?: EditorElement | null,
+        attributes?: ElementAttributes | null,
+        handleUpdate?: Function,
+        updateName?: Function,
+        updateContent?: Function
+    }
 }

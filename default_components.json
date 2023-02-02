@@ -25,7 +25,10 @@
             "color": "#000000",
             "position": "absolute",
             "top": "0px",
-            "left": "0px"
+            "left": "0px",
+            "fontWeight": "normal",
+            "textDecoration": "none",
+            "fontStyle": "normal"
         },
         "parent": "",
         "children": []

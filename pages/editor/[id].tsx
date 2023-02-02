@@ -6,7 +6,7 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import structureTest from '@/test_structure.json';
 import ComponentsPanel from "@/components/editor/ComponentsPanel";
 import EditorElement from "@/components/editor/EditorElement";
-import ElementPanel from "@/components/editor/ElementPanel";
+import ElementPanel from "@/components/editor/elementPanel/ElementPanel";
 import { StructureContext } from "@/context/StructureContext";
 import NavItem from "@/components/general/nav/NavItem";
 
