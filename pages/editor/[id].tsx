@@ -105,6 +105,10 @@ function Editor() {
     const deleteElement = (element: EditorElement) => {
         const newStructure = structuredClone(structure);
         newStructure.splice(newStructure.findIndex((item) => item.id === element.id), 1);
+        const parent = newStructure.find((item) => item.id === element.parent);
+        if(parent) {
+            parent.children.splice(parent.children.findIndex((item) => item === element.id), 1);
+        }
         setStructure(newStructure);
     }
 
