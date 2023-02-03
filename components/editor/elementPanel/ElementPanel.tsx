@@ -100,7 +100,7 @@ function ElementPanel() {
                             <div onClick={() => backgroundColorRef.current?.click()} className="w-6 h-6 rounded-lg border aspect-square cursor-pointer" style={{backgroundColor: attributes.backgroundColor}}></div>
                             <input type="text" value={attributes.backgroundColor}
                                 onChange={(e) => handleUpdate({...attributes, backgroundColor: e.target.value})}
-                                className="w-full element-input"
+                                className="w-44 element-input"
                             />
                         </div>
                     </div>}

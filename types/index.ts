@@ -37,7 +37,8 @@ declare global {
         left?: string,
         fontWeight?: string,
         textDecoration?: string,
-        fontStyle?: string
+        fontStyle?: string,
+        fontSize?: string,
     }
 
     type EditorElement = {

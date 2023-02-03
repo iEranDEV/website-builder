@@ -28,7 +28,8 @@
             "left": "0px",
             "fontWeight": "normal",
             "textDecoration": "none",
-            "fontStyle": "normal"
+            "fontStyle": "normal",
+            "fontSize": "14px"
         },
         "parent": "",
         "children": []
