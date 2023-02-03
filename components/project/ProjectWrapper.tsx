@@ -12,11 +12,11 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
                 <IoArrowBackOutline className="h-6 w-6"></IoArrowBackOutline>
             </NavItem>,
 
-            <NavItem key={'settings'} text="Settings" route={'/project/' + project?._id + '/settings'}>
+            <NavItem key={'settings'} text="Settings" route={'/project/' + project?.id + '/settings'}>
                 <FiSettings className="h-6 w-6"></FiSettings>
             </NavItem>,
 
-            <NavItem key={'pages'} text="Pages" route={'/project/' + project?._id + '/pages'}>
+            <NavItem key={'pages'} text="Pages" route={'/project/' + project?.id + '/pages'}>
                 <FiBox className="h-6 w-6"></FiBox>
             </NavItem>,
 

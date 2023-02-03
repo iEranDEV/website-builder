@@ -1,66 +1,46 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { createContext } from "react";
+import { auth, db } from "@/firebase";
+import { doc, onSnapshot } from "firebase/firestore";
 
-export const UserContext = createContext<{user: User | null, authorize: Function, logOut: Function, loading: boolean, setLoading: Function}>({
+export const UserContext = createContext<{user: User | null, setUser: Function}>({
     user: null,
-    authorize: () => {},
-    logOut: () => {},
-    loading: false,
-    setLoading: () => {},
+    setUser: () => {}
 })
 
 export const UserContextProvider = ({ children } : {children: JSX.Element}) => {
     const [user, setUser] = useState<User | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [id, setID] = useState<string | null>(null);
 
     const router = useRouter();
 
-    const authorize = (value: User) => {
-        setUser(value);
-        localStorage.setItem('user', JSON.stringify(value));
-    }
-
-    const logOut = () => {
-        setUser(null);
-        localStorage.removeItem('user');
-
-    }
-
     useEffect(() => {
-        const localData = localStorage.getItem('user');
-        if(localData) {
-            //setUser(JSON.parse(localData) as User);
-            const localUser = JSON.parse(localData) as User;
-            const syncData = async () => {
-                console.log('syncing user data...')
-                await fetch('/api/account/login', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        email: localUser.email,
-                        password: localUser.password,
-                    })
-                }).then(async (result) => {
-                    const data = await result.json();
-                    if(data.success) {
-                        authorize(data.data as User);
-                    } else {
-                        logOut();
-                        router.push('/account/login');
-                    }
-                }).catch(() => {
-                    logOut();
-                    router.push('/account/login');
-                });
+        const authSession = auth.onAuthStateChanged(async (data) => {
+            console.log(data);
+            if(data) {
+                setID(data.uid);
+            } else {
+                setID(null);
             }
-            syncData();
-        } else {
-            router.push('/account/login');
-        }
+        })
+        authSession();
     }, []);
 
+    useEffect(() => {
+        if(id) {
+            const unsubscribe = onSnapshot(doc(db, "users", id), (doc) => {
+                setUser(doc.data() as User);
+            })
+
+            return () => {
+                unsubscribe();
+            }
+        }
+    }, [id])
+
     return (
-        <UserContext.Provider value={{user: user, authorize: authorize, logOut: logOut, loading: loading, setLoading: setLoading}}>
+        <UserContext.Provider value={{user: user, setUser: setUser}}>
             {children}
         </UserContext.Provider>
     )

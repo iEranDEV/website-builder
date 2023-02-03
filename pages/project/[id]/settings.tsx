@@ -1,5 +1,7 @@
 import ProjectWrapper from "@/components/project/ProjectWrapper";
 import { UserContext } from "@/context/UserContext";
+import { db } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 
@@ -14,19 +16,15 @@ function ProjectSettings() {
 
     useEffect(() => {
         if(user) {
-            fetch(`/api/project/${id}`).then(async (result) => {
-                const data = await result.json();
-                if(data.success) {
-                    const val = data.data as Project;
-                    if(val.owner === user._id) {
-                        setProject(val);
-                    } else {
-                        router.push('/');
-                    }
-                } 
-            }).catch(() => {
-                router.push('/')
-            })
+            const syncData = async () => {
+                const docSnap = await getDoc(doc(db, "projects", id as string))
+                if(docSnap.exists()) {
+                    setProject(docSnap.data() as Project);
+                } else {
+                    router.push('/');
+                }
+            };
+            syncData();
         }
     }, [user]);
 

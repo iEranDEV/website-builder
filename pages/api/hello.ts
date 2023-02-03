@@ -1,4 +1,4 @@
-import connect from '@/lib/db'
+import connect from '@/lib/firebase'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 type Data = {

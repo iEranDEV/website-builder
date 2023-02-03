@@ -10,7 +10,7 @@ function ProjectCard({project}: {project?: Project,}) {
             <div className="w-full h-60 bg-stone-100 shadow rounded-xl p-2 flex flex-col divide-y-2 justify-between text-stone-700">
                 <h1 className="text-xl font-semibold h-1/2 break-words overflow-hidden p-2">{project.name}</h1>
                 <div className="h-1/2 flex flex-col justify-around">
-                    <p className="w-full text-stone-400">Created: {new Date(project.createdAt).toLocaleDateString()}</p>
+                    <p className="w-full text-stone-400">Created: {project.createdAt.toDate().toLocaleDateString()}</p>
                     <div className="w-full flex flex-col gap-2 justify-between md:flex-row md:items-center text-stone-500">
 
                         {/* Amount of pages */}
@@ -19,7 +19,7 @@ function ProjectCard({project}: {project?: Project,}) {
                             <span className="text-lg font-semibold">0</span>
                         </div>
 
-                        <Link href={'/project/' + project._id + '/settings'} className="w-40">
+                        <Link href={'/project/' + project.id + '/settings'} className="w-40">
                             <StyledButton text={'Edit project'}></StyledButton>
                         </Link>
                     </div>

@@ -1,30 +1,30 @@
+import { Timestamp } from "firebase/firestore";
+
 export {};
 
 declare global {
     type Page = {
-        _id: string,
+        id: string,
         name: string,
         structure: Array<EditorElement>,
-        createdAt: Date,
-        modifiedAt: Date,
+        createdAt: Timestamp,
+        modifiedAt: Timestamp,
         project: string
     }
 
     type User = {
-        _id: string,
+        id: string,
         email: string,
         username: string,
-        password: string,
         createdAt: Date
     }
 
     type Project = {
-        _id: string,
+        id: string,
         owner: string,
         name: string,
         description: string,
-        createdAt: Date,
-        pages: Array<Page>
+        createdAt: Timestamp
     }
 
     type ElementAttributes = {

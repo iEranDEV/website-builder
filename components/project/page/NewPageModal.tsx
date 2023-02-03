@@ -1,4 +1,6 @@
 import { UserContext } from "@/context/UserContext";
+import { db } from "@/firebase";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useContext } from "react";
 import { useState } from "react";
 import { FormEvent } from "react";
@@ -6,28 +8,22 @@ import { FiX } from "react-icons/fi";
 import Modal from "../../general/Modal";
 import StyledButton from "../../general/StyledButton";
 
-function NewPageModal({setMenu, syncData, projectID}: {setMenu: Function, syncData: Function, projectID: string}) {
+function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage: Function, projectID: string}) {
     const [name, setName] = useState('');
-
-    const userContext = useContext(UserContext);
-    const user = userContext.user;
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setMenu(false);
-        console.log(name);
-        await fetch('/api/page/new', {
-            method: 'POST',
-            body: JSON.stringify({
-                name: name,
-                project: projectID
-            })
-        }).then(async (result) => {
-            const data = await result.json();
-            if(data.success) {
-                syncData();
-            }
-        })
+        const page: Page = {
+            id: crypto.randomUUID(),
+            name: name,
+            structure: [],
+            createdAt: Timestamp.now(),
+            modifiedAt: Timestamp.now(),
+            project: projectID
+        }
+        await setDoc(doc(db, "projects/" + projectID + '/pages', page.id), page);
+        addPage(page);
     }
 
     return (

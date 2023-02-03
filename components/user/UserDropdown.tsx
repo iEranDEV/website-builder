@@ -14,7 +14,7 @@ function UserDropdown() {
     const user = userContext.user;
 
     const handleLogOut = () => {
-        userContext.logOut();
+        userContext.setUser(null);
         router.push('/account/login');
     }
 

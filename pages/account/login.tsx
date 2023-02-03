@@ -4,6 +4,9 @@ import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -26,23 +29,16 @@ function LoginPage() {
             return;
         }
 
-        await fetch('/api/account/login', {
-            method: 'POST',
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            })
-        }).then(async (result) => {
-            const data = await result.json();
-            if(data.success) {
-                userContext.authorize(data.data);
+        await signInWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
+            const userData = userCredentials.user;
+            const userSnap = await getDoc(doc(db, "users", userData.uid));
+            if(userSnap.exists()) {
+                userContext.setUser(userSnap.data() as User);
                 router.push('/');
-            } else {
-                setError(data.error);
-            }
-        }).catch(() => {
-            setError('Something went wrong. Try again.')
-        });
+            } else setError('user not found');
+        }).catch((error) => {
+            setError(error.code);
+        })
     }
 
     return (

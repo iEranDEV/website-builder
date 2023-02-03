@@ -4,6 +4,9 @@ import Link from "next/link";
 import { FormEvent, useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/firebase";
+import { doc, setDoc } from "firebase/firestore";
 
 function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -32,24 +35,18 @@ function RegisterPage() {
             return;
         }
 
-        await fetch('/api/account/register', {
-            method: 'POST',
-            body: JSON.stringify({
+        await createUserWithEmailAndPassword(auth, email, password).then(async (userCredentials) => {
+            const userData = userCredentials.user;
+            const user: User = {
+                id: userData.uid,
                 email: email,
                 username: username,
-                password: password,
-            })
-        }).then(async (result) => {
-            const data = await result.json();
-            if(data.success) {
-                userContext.authorize(data.data);
-                router.push('/');
-            } else {
-                setError(data.error);
+                createdAt: new Date()
             }
-        }).catch(() => {
-            setError('Something went wrong. Try again.')
-        });
+            await setDoc(doc(db, "users", userData.uid), user);
+            userContext.setUser(user);
+            router.push('/');
+        })
     }
 
     return (

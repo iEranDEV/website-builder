@@ -1,4 +1,6 @@
 import { UserContext } from "@/context/UserContext";
+import { db } from "@/firebase";
+import { doc, setDoc, Timestamp } from "firebase/firestore";
 import { useContext } from "react";
 import { useState } from "react";
 import { FormEvent } from "react";
@@ -16,20 +18,17 @@ function NewProjectModal({setMenu, addProject}: {setMenu: Function, addProject: 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setMenu(false);
-        console.log(name);
-        await fetch('/api/project/new', {
-            method: 'POST',
-            body: JSON.stringify({
+        if(user) {
+            const project: Project = {
+                id: crypto.randomUUID(),
+                owner: user.id,
                 name: name,
                 description: description,
-                owner: user?._id
-            })
-        }).then(async (result) => {
-            const data = await result.json();
-            if(data.success) {
-                addProject(data.data as Project);
+                createdAt: Timestamp.now()
             }
-        })
+            await setDoc(doc(db, "projects", project.id), project);
+            addProject(project);
+        }
     }
 
     return (
