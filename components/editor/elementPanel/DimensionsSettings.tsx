@@ -1,8 +1,28 @@
+import { useEffect, useState } from "react";
 import { AiOutlineColumnHeight, AiOutlineColumnWidth } from "react-icons/ai";
 import { TbAxisX, TbAxisY } from "react-icons/tb";
 
 
 function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
+
+    const [widthType, setWidthType] = useState('px');
+    const [heightType, setHeightType] = useState('px');
+
+    useEffect(() => {
+        if(attributes?.width.includes('%')) setWidthType('%');
+        else if(attributes?.width.includes('rem')) setWidthType('rem');
+
+        if(attributes?.height.includes('%')) setHeightType('%');
+        else if(attributes?.height.includes('rem')) setHeightType('rem');
+    }, [attributes]);
+
+    const parse = (val: string) => {
+        const str = val.replace('px', '').replace('%', '').replace('rem', '');
+        if(str !== '') {
+            return Number.parseInt(str);
+        }
+        return 0;
+    }
 
     return (
         <>
@@ -32,19 +52,35 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                 {/* Width */}
                 <div className="flex items-center gap-2 w-full">
                     <AiOutlineColumnWidth className="h-6 w-6"></AiOutlineColumnWidth>
-                    <input type="text" value={attributes.width}
-                        onChange={(e) => handleUpdate({...attributes, width: e.target.value})}
-                        className="w-48 element-input"
+                    <input type="text" value={parse(attributes.width)}
+                        onChange={(e) => handleUpdate({...attributes, width: e.target.value + widthType})}
+                        className="w-32 element-input"
                     />
+                    <select className="h-full w-20 rounded-xl border border-stone-300" value={widthType} onChange={(e) => {
+                        setWidthType(e.target.value);
+                        handleUpdate({...attributes, width: parse(attributes.width) + e.target.value})
+                    }}>
+                        <option value="px">px</option>
+                        <option value="%">%</option>
+                        <option value="rem">rem</option>
+                    </select>
                 </div>
 
                 {/* Height */}
                 <div className="flex items-center gap-2 w-full">
                     <AiOutlineColumnHeight className="h-6 w-6"></AiOutlineColumnHeight>
-                    <input type="text" value={attributes.height}
-                        onChange={(e) => handleUpdate({...attributes, height: e.target.value})}
-                        className="w-48 element-input"
+                    <input type="text" value={parse(attributes.height)}
+                        onChange={(e) => handleUpdate({...attributes, height: e.target.value + heightType})}
+                        className="w-32 element-input"
                     />
+                    <select className="h-full w-20 rounded-xl border border-stone-300" value={heightType} onChange={(e) => {
+                        setHeightType(e.target.value);
+                        handleUpdate({...attributes, height: parse(attributes.height) + e.target.value})
+                    }}>
+                        <option value="px">px</option>
+                        <option value="%">%</option>
+                        <option value="rem">rem</option>
+                    </select>
                 </div>
             </div>
         }
