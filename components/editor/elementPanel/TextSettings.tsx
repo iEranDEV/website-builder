@@ -53,21 +53,21 @@ function TextSettings({element, attributes, handleUpdate, updateContent}: Elemen
                         <button onClick={() => {
                             if(attributes.fontWeight === 'normal') handleUpdate({...attributes, fontWeight: 'bold'});
                             else handleUpdate({...attributes, fontWeight: 'normal'});
-                        }} className={`h-7 w-7 border rounded flex justify-center items-center ${attributes.fontWeight === 'bold' ? 'border-emerald-500 text-emerald-500' : 'border-stone-400 text-stone-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.fontWeight === 'bold' ? 'border-sky-500 text-sky-500' : 'border-stone-400 text-stone-700'}`}>
                             <BiBold className="h-5 w-5"></BiBold>
                         </button>
                         {/* Italic */}
                         <button onClick={() => {
                             if(attributes.fontStyle === 'normal') handleUpdate({...attributes, fontStyle: 'italic'});
                             else handleUpdate({...attributes, fontStyle: 'normal'});
-                        }} className={`h-7 w-7 border rounded flex justify-center items-center ${attributes.fontStyle === 'italic' ? 'border-emerald-500 text-emerald-500' : 'border-stone-400 text-stone-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.fontStyle === 'italic' ? 'border-sky-500 text-sky-500' : 'border-stone-400 text-stone-700'}`}>
                             <BiItalic className="h-5 w-5"></BiItalic>
                         </button>
                         {/* Underline */}
                         <button onClick={() => {
                             if(attributes.textDecoration === 'none') handleUpdate({...attributes, textDecoration: 'underline'});
                             else handleUpdate({...attributes, textDecoration: 'none'});
-                        }} className={`h-7 w-7 border rounded flex justify-center items-center ${attributes.textDecoration === 'underline' ? 'border-emerald-500 text-emerald-500' : 'border-stone-400 text-stone-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.textDecoration === 'underline' ? 'border-sky-500 text-sky-500' : 'border-stone-400 text-stone-700'}`}>
                             <BiUnderline className="h-5 w-5"></BiUnderline>
                         </button>
                     </div>

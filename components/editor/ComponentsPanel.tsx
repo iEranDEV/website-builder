@@ -1,7 +1,7 @@
 import { StructureContext } from "@/context/StructureContext";
 import { useContext } from "react";
 import { BiText } from "react-icons/bi";
-import { FiImage, FiSquare } from "react-icons/fi";
+import { FiSquare } from "react-icons/fi";
 import ComponentsItem from "./ComponentsItem";
 import StructureTreeElement from "./StructureTreeElement";
 
@@ -17,9 +17,11 @@ function ComponentsPanel() {
         <ComponentsItem key={'text'} text="Text">
             <BiText className="h-6 w-6"></BiText>
         </ComponentsItem>,
+        /*
         <ComponentsItem key={'image'} text="Image">
             <FiImage className="h-6 w-6"></FiImage>
         </ComponentsItem>
+        */
     ]
 
     return (

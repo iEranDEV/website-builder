@@ -1,6 +1,6 @@
 [
     {
-        "id": "daofuoaw8iftgaf",
+        "id": "ROOT_ELEMENT",
         "type": "ROOT_ELEMENT",
         "name": "root",
         "attributes": {
@@ -10,10 +10,10 @@
             "color": "#555555"
         },
         "parent": null,
-        "children": ["oafyawifgasfaw"]
+        "children": ["SECTION_1"]
     },
     {
-        "id": "oafyawifgasfaw",
+        "id": "SECTION_1",
         "type": "SECTION",
         "name": "Section #1",
         "attributes": {
@@ -23,7 +23,7 @@
             "color": "#555555",
             "position": "relative"
         },
-        "parent": "daofuoaw8iftgaf",
+        "parent": "ROOT_ELEMENT",
         "children": []
     }
 ]

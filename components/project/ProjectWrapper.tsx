@@ -24,7 +24,7 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
                 <FiEye className="h-6 w-6"></FiEye>
             </NavItem>,
 
-            <NavItem key={'generate'} text="Generate" disabled>
+            <NavItem onClick={generate} key={'generate'} text="Generate">
                 <FiCode className="h-6 w-6"></FiCode>
             </NavItem>,
 
@@ -33,6 +33,11 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
             </NavItem>,
         ]
 	}
+
+    const generate = () => {
+        const document = window.document.implementation.createHTMLDocument("test");
+        console.log(document)
+    }
 
     return (
         <Layout navbar={navBarItems()}>

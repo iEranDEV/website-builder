@@ -33,5 +33,5 @@
 }
 
 .element-input {
-    @apply bg-stone-100 border border-stone-300 px-2 py-1 rounded-xl font-semibold;
+    @apply bg-stone-200 border border-stone-300 px-2 py-1 rounded-xl font-semibold;
 }

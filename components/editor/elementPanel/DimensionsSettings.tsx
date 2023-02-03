@@ -110,7 +110,7 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                         onChange={(e) => handleUpdate({...attributes, width: e.target.value + widthType})}
                         className="w-32 element-input"
                     />
-                    <select className="h-full w-20 rounded-xl border border-stone-300 bg-stone-100 font-semibold" value={widthType} onChange={(e) => {
+                    <select className="h-full w-20 rounded-xl border border-stone-300 bg-stone-200 font-semibold" value={widthType} onChange={(e) => {
                         setWidthType(e.target.value);
                         handleUpdate({...attributes, width: parse(attributes.width) + e.target.value})
                     }}>
@@ -127,7 +127,7 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                         onChange={(e) => handleUpdate({...attributes, height: e.target.value + heightType})}
                         className="w-32 element-input"
                     />
-                    <select className="h-full w-20 rounded-xl border border-stone-300 bg-stone-100 font-semibold" value={heightType} onChange={(e) => {
+                    <select className="h-full w-20 rounded-xl border border-stone-300 bg-stone-200 font-semibold" value={heightType} onChange={(e) => {
                         setHeightType(e.target.value);
                         handleUpdate({...attributes, height: parse(attributes.height) + e.target.value})
                     }}>
@@ -157,14 +157,14 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
 
                     {/* Values dropdowns */}
                     <div className="w-24 h-full flex flex-col justify-around items-end">
-                        <select className="h-8 w-24 rounded-xl border border-stone-300 bg-stone-100 font-semibold"
+                        <select className="h-8 w-24 rounded-xl border border-stone-300 bg-stone-200 font-semibold"
                             value={attributes.left ? 'left' : 'right'}
                             onChange={(e) => updateDimension(e.target.value)}
                         >
                             <option value="left">left</option>
                             <option value="right">right</option>
                         </select>
-                        <select className="h-8 w-24 rounded-xl border border-stone-300 bg-stone-100 font-semibold"
+                        <select className="h-8 w-24 rounded-xl border border-stone-300 bg-stone-200 font-semibold"
                             value={attributes.top ? 'top' : 'bottom'}
                             onChange={(e) => updateDimension(e.target.value)}
                         >

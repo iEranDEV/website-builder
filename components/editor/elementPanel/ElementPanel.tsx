@@ -60,7 +60,7 @@ function ElementPanel() {
     }
 
     return (
-        <div className={`w-96 p-2 h-full bg-stone-200 border-l border-stone-400 overflow-x-auto flex flex-col gap-2`}>
+        <div className={`w-64 min-w-[16rem] max-w-[16rem] p-2 h-full bg-stone-100 border-l border-stone-400 overflow-x-auto flex flex-col gap-2`}>
             {element && attributes ?
                 <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-stone-300 text-stone-600">
 

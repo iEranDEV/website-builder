@@ -1,12 +1,11 @@
-import { UserContext } from "@/context/UserContext";
 import { db } from "@/firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
-import { useContext } from "react";
 import { useState } from "react";
 import { FormEvent } from "react";
 import { FiX } from "react-icons/fi";
 import Modal from "../../general/Modal";
 import StyledButton from "../../general/StyledButton";
+import startStructure from '@/test_structure.json'
 
 function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage: Function, projectID: string}) {
     const [name, setName] = useState('');
@@ -17,7 +16,7 @@ function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage
         const page: Page = {
             id: crypto.randomUUID(),
             name: name,
-            structure: [],
+            structure: [...startStructure] as Array<EditorElement>,
             createdAt: Timestamp.now(),
             modifiedAt: Timestamp.now(),
             project: projectID
