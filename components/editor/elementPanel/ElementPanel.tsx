@@ -87,11 +87,11 @@ function ElementPanel() {
                         <TextSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateContent={updateContent}></TextSettings>
                     }
 
-                    {element.type !== 'TEXT' && <div className="flex flex-col gap-2">
+                    {element.type !== 'TEXT' && <div className="flex w-full flex-col gap-2">
                         <p className="mono font-bold text-stone-400">Background</p>
 
                         {/* Background color */}
-                        <div className="flex items-center gap-2 w-full">
+                        <div className="flex items-center gap-2">
                             <BiColorFill className="h-6 w-6"></BiColorFill>
                             <input ref={backgroundColorRef} value={attributes.backgroundColor}
                                 onChange={(e) => handleUpdate({...attributes, backgroundColor: e.target.value})}
@@ -100,7 +100,7 @@ function ElementPanel() {
                             <div onClick={() => backgroundColorRef.current?.click()} className="w-6 h-6 rounded-lg border aspect-square cursor-pointer" style={{backgroundColor: attributes.backgroundColor}}></div>
                             <input type="text" value={attributes.backgroundColor}
                                 onChange={(e) => handleUpdate({...attributes, backgroundColor: e.target.value})}
-                                className="w-44 element-input"
+                                className="w-full element-input"
                             />
                         </div>
                     </div>}

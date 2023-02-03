@@ -35,6 +35,8 @@ declare global {
         position?: any,
         top?: string,
         left?: string,
+        bottom?: string,
+        right?: string,
         fontWeight?: string,
         textDecoration?: string,
         fontStyle?: string,

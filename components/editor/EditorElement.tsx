@@ -92,6 +92,10 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
         }
     }
 
+    const classes = `whitespace-pre outline-2 
+        ${clickedElement === element?.id && 'outline !outline-sky-500 z-50'}
+    `
+
     return (
         <div onMouseUp={(e) => element?.children.includes(structure.movedElement.id) && handleMouseUp(e)} 
             onMouseMove={(e) => element?.children.includes(structure.movedElement.id) && handleMouseMove(e)}
@@ -101,7 +105,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
             onClick={(e) => handleClick(e)} 
             id={'element_' + elementID}
             style={element?.attributes} 
-            className={`whitespace-pre outline-2 ${element?.type != 'ROOT_ELEMENT' && element?.type != 'SECTION' && 'cursor-move'} ${element?.type != 'ROOT_ELEMENT' && 'hover:outline outline-stone-500 hover:z-50'} ${clickedElement === element?.id && 'outline !outline-emerald-500 z-50'}`}
+            className={classes}
         >
             {<div onDragEnter={() => handleDragStatus(true)} 
                 onDragLeave={() => handleDragStatus(false)}
@@ -110,10 +114,12 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
                 className={`${dragStatus && '!bg-stone-500/50'} absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
                 style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
             </div>}
-            {element?.content}
-            {element?.children.map((elementID) => {
-                return <EditorElement key={elementID} elementID={elementID} clickedElement={clickedElement} setClickedElement={setClickedElement}></EditorElement>
-            })}
+            {element && <>
+                {element.content}
+                {element.children.map((elementID) => {
+                    return <EditorElement key={elementID} elementID={elementID} clickedElement={clickedElement} setClickedElement={setClickedElement}></EditorElement>
+                })}
+            </>}
         </div>
     )
 
