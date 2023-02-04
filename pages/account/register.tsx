@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebase";
 import { doc, setDoc } from "firebase/firestore";
+import { NotificationsContext } from "@/context/NotificationsContext";
 
 function RegisterPage() {
     const [email, setEmail] = useState('');
@@ -15,6 +16,7 @@ function RegisterPage() {
     const [error, setError] = useState<string | null>(null);
 
     const userContext = useContext(UserContext);
+    const notifications = useContext(NotificationsContext);
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -45,6 +47,11 @@ function RegisterPage() {
             }
             await setDoc(doc(db, "users", userData.uid), user);
             userContext.setUser(user);
+            notifications.addNotification({
+                id: crypto.randomUUID(),
+                type: 'SUCCESS',
+                message: `Registered as ${user.username}`
+            })
             router.push('/');
         })
     }

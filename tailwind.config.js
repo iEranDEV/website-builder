@@ -7,7 +7,17 @@ module.exports = {
 		"./src/**/*.{js,ts,jsx,tsx}",
 	  ],
 	theme: {
-		extend: {},
+		extend: {
+			keyframes: {
+				slideFromLeft: {
+					'0%': { transform: 'translateX(-100px)' },
+					'100%': { transform: 'translateX(0%)' }
+				}
+			},
+			animation: {
+				slide: 'slideFromLeft 0.2s linear'
+			}
+		},
 	},
 	plugins: [
 		require('@tailwindcss/line-clamp'),

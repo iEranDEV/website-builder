@@ -1,14 +1,17 @@
 import { db } from "@/firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { FormEvent } from "react";
 import { FiX } from "react-icons/fi";
 import Modal from "../../general/Modal";
 import StyledButton from "../../general/StyledButton";
 import startStructure from '@/test_structure.json'
+import { NotificationsContext } from "@/context/NotificationsContext";
 
 function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage: Function, projectID: string}) {
     const [name, setName] = useState('');
+
+    const notifications = useContext(NotificationsContext);
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -22,6 +25,11 @@ function NewPageModal({setMenu, addPage, projectID}: {setMenu: Function, addPage
             project: projectID
         }
         await setDoc(doc(db, "projects/" + projectID + '/pages', page.id), page);
+        notifications.addNotification({
+            id: crypto.randomUUID(),
+            type: 'SUCCESS',
+            message: `Created page ${page.name}!`
+        })
         addPage(page);
     }
 

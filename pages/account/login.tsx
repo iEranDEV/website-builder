@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "@/firebase";
 import { doc, getDoc } from "firebase/firestore";
+import { NotificationsContext } from "@/context/NotificationsContext";
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ function LoginPage() {
     const [error, setError] = useState<string | null>(null);
 
     const userContext = useContext(UserContext);
+    const notifications = useContext(NotificationsContext);
     const router = useRouter();
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -33,7 +35,13 @@ function LoginPage() {
             const userData = userCredentials.user;
             const userSnap = await getDoc(doc(db, "users", userData.uid));
             if(userSnap.exists()) {
-                userContext.setUser(userSnap.data() as User);
+                const user = userSnap.data() as User;
+                userContext.setUser(user);
+                notifications.addNotification({
+                    id: crypto.randomUUID(),
+                    type: 'SUCCESS',
+                    message: `Successfully logged in as ${user.username}`
+                })
                 router.push('/');
             } else setError('user not found');
         }).catch((error) => {

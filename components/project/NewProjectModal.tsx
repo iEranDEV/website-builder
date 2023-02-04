@@ -1,3 +1,4 @@
+import { NotificationsContext } from "@/context/NotificationsContext";
 import { UserContext } from "@/context/UserContext";
 import { db } from "@/firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
@@ -13,6 +14,7 @@ function NewProjectModal({setMenu, addProject}: {setMenu: Function, addProject: 
     const [description, setDescription] = useState('');
 
     const userContext = useContext(UserContext);
+    const notifications = useContext(NotificationsContext);
     const user = userContext.user;
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -27,6 +29,11 @@ function NewProjectModal({setMenu, addProject}: {setMenu: Function, addProject: 
                 createdAt: Timestamp.now()
             }
             await setDoc(doc(db, "projects", project.id), project);
+            notifications.addNotification({
+                id: crypto.randomUUID(),
+                type: 'SUCCESS',
+                message: `Created project ${project.name}!`
+            })
             addProject(project);
         }
     }

@@ -60,4 +60,10 @@ declare global {
         updateName?: Function,
         updateContent?: Function
     }
+
+    type INotification = {
+        id: string,
+        type: 'SUCCESS' | 'ERROR',
+        message: string
+    }
 }
