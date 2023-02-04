@@ -44,8 +44,8 @@ function ProjectPages() {
 
     return (
         <ProjectWrapper project={project}>
-            <div className="w-full h-full p-4">
-                {pages && <div className="w-full h-full overflow-x-auto gap-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            <div className="w-full h-full overflow-y-auto p-4">
+                {pages && <div className="elements-list w-full overflow-x-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {pages?.map((item) => <PageCard key={item.id} page={item}></PageCard>)}
                     <div onClick={() => setNewPage(true)} className='h-40'>
                         <PageCard key={'add_page'}></PageCard>

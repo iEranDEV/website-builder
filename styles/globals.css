@@ -35,3 +35,15 @@
 .element-input {
     @apply bg-stone-200 border border-stone-300 px-2 py-1 rounded-xl font-semibold;
 }
+
+.elements-list:hover > .element-card:not(:hover) {
+    @apply opacity-50;
+}
+
+.element-card:hover {
+    @apply scale-100;
+}
+
+.element-card {
+    @apply transition-all scale-90;
+}
