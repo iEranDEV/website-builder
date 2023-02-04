@@ -63,7 +63,7 @@ function NewProjectModal({setMenu, addProject}: {setMenu: Function, addProject: 
                     </div>
 
                     {/* Submit button */}
-                    <StyledButton text={'Click to create category'}></StyledButton>
+                    <StyledButton text={'Click to create project'}></StyledButton>
                 </form>
             </div>
         </Modal>

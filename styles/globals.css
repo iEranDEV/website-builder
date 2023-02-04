@@ -40,10 +40,6 @@
     @apply opacity-50;
 }
 
-.element-card:hover {
-    @apply scale-100;
-}
-
 .element-card {
-    @apply transition-all scale-90;
+    @apply transition-all ;
 }
