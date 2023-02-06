@@ -1,6 +1,6 @@
 import Layout from "@/components/general/Layout";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FiPlus, FiSave, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import ComponentsPanel from "@/components/editor/ComponentsPanel";
@@ -10,6 +10,7 @@ import { StructureContext } from "@/context/StructureContext";
 import NavItem from "@/components/general/nav/NavItem";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
+import { NotificationsContext } from "@/context/NotificationsContext";
 
 function Editor() {
     const [page, setPage] = useState<Page | null>(null);
@@ -19,6 +20,7 @@ function Editor() {
     const [movedElement, setMovedElement] = useState({id: '', posX: 0, posY: 0});
 
     const router = useRouter();
+    const notificationContext = useContext(NotificationsContext);
     const { id, pageID } = router.query;
 
     useEffect(() => {
@@ -81,6 +83,11 @@ function Editor() {
     const save = async () => {
         await updateDoc(doc(db, "projects/" + page?.project + '/pages/' + page?.id), {
             structure: structure
+        })
+        notificationContext.addNotification({
+            id: crypto.randomUUID(),
+            type: 'SUCCESS',
+            message: 'Changes saved!'
         })
     }
 

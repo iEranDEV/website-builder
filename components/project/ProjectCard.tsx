@@ -1,9 +1,24 @@
+import { db } from "@/firebase";
+import { collection, getCountFromServer } from "firebase/firestore";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { HiOutlineNewspaper } from 'react-icons/hi2'
 import StyledButton from "../general/StyledButton";
 
-function ProjectCard({project}: {project?: Project,}) {
+function ProjectCard({project}: {project?: Project}) {
+    const [pagesCount, setPagesCount] = useState(0);
+
+    const syncPagesCount = async () => {
+        if(project) {
+            const snapshot = await getCountFromServer(collection(db, "projects/" + project?.id + '/pages/'));
+            setPagesCount(snapshot.data().count);
+        }
+    }
+
+    useEffect(() => {
+        syncPagesCount();
+    }, []);
 
     if(project) {
         return (
@@ -16,7 +31,7 @@ function ProjectCard({project}: {project?: Project,}) {
                         {/* Amount of pages */}
                         <div className="flex items-center gap-1">
                             <HiOutlineNewspaper className="h-5 w-5"></HiOutlineNewspaper>
-                            <span className="text-lg font-semibold">0</span>
+                            <span className="text-lg font-semibold">{pagesCount}</span>
                         </div>
 
                         <Link href={'/project/' + project.id + '/settings'} className="w-40">

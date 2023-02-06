@@ -25,7 +25,7 @@ function ComponentsPanel() {
     ]
 
     return (
-        <div className="w-60 min-w-[15rem] max-w-[15rem] h-full bg-stone-200 border-r border-stone-400 overflow-x-auto flex flex-col gap-2 divide-y divide-stone-400">
+        <div className="w-60 min-w-[15rem] max-w-[15rem] h-full bg-stone-100 border-r border-stone-400 overflow-x-auto flex flex-col gap-2 divide-y divide-stone-400">
             <div className="w-full h-1/2 flex flex-col gap-2">
                 <p className="p-2 mono text-sm font-bold text-stone-400">Drag and drop items to add them to your page</p>
                 {items}

@@ -28,6 +28,9 @@ export default function Home() {
 	return (
 		<Layout navbar={navBarItems()}>
 			<div className="w-full h-full">
+				<div className="w-full p-4 flex flex-col gap-2">
+					<h1 className="text-2xl font-bold mono text-stone-700">Your projects</h1>
+				</div>
 				<ProjectsList></ProjectsList>
 			</div>
 		</Layout>
