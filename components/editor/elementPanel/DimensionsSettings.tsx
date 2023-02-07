@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineColumnHeight, AiOutlineColumnWidth, AiOutlinePlus } from "react-icons/ai";
 import { BiArrowFromBottom, BiArrowFromLeft, BiArrowFromRight, BiArrowFromTop, BiArrowToLeft } from "react-icons/bi";
 
-function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
+function DimensionsSettings({ element, attributes, handleUpdate}: ElementSettingsProps) {
     const [widthType, setWidthType] = useState('px');
     const [heightType, setHeightType] = useState('px');
 
@@ -84,7 +84,8 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
         {attributes && handleUpdate && 
             <div className="flex flex-col gap-2">
                 <p className="mono font-bold text-stone-400">Dimensions</p>
-                <div className="flex w-full gap-2">
+                
+                {element?.type !== 'SECTION' && <div className="flex w-full gap-2">
                     {/* X axis */}
                     <div className="w-1/2 flex gap-2 items-center">
                         {getAxisIcon('X')}
@@ -102,10 +103,10 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                             type="number" className="w-full element-input"
                         />
                     </div>
-                </div>
+                </div>}
 
                 {/* Width */}
-                <div className="flex items-center gap-2 w-full">
+                {element?.type !== 'SECTION' && <div className="flex items-center gap-2 w-full">
                     <AiOutlineColumnWidth className="h-6 w-6"></AiOutlineColumnWidth>
                     <input type="text" value={parse(attributes.width)}
                         onChange={(e) => handleUpdate({...attributes, width: e.target.value + widthType})}
@@ -121,7 +122,7 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                             handleUpdate({...attributes, width: parse(attributes.width) + val})
                         }}></DropdownMenu>
                     </div>
-                </div>
+                </div>}
 
                 {/* Height */}
                 <div className="flex items-center gap-2 w-full">
@@ -144,7 +145,7 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
 
 
                 {/* Constraints */}
-                <div className="h-32 py-2 flex justify-between items-center">
+                {element?.type !== 'SECTION' && <div className="h-32 py-2 flex justify-between items-center">
                     {/* Visual box */}
                     <div className="w-28 h-auto aspect-square flex justify-center items-center">
                         <div className="relative w-16 h-16 border-2 border-neutral-500 rounded-lg flex justify-center items-center">
@@ -172,7 +173,7 @@ function DimensionsSettings({ attributes, handleUpdate}: ElementSettingsProps) {
                             {value: 'bottom', text: 'Bottom'}, 
                         ]} onChange={(val: string) => updateDimension(val)}></DropdownMenu>
                     </div>
-                </div>
+                </div>}
             </div>
         }
         </>

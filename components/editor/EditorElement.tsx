@@ -83,6 +83,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
         const rect = (e.target as HTMLDivElement).getBoundingClientRect();
         if(element?.type !== 'ROOT_ELEMENT') {
             setDragStatus(false);
+            console.log(structure.dragElement);
             const newElement = structuredClone((defaultComponents as any)[structure.dragElement.toLowerCase()]) as EditorElement;
             newElement.id = crypto.randomUUID();
             newElement.parent = element ? element.id : null;

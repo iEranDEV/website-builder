@@ -46,8 +46,9 @@ declare global {
     type EditorElement = {
         id: string,
         name: string,
-        type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'IMAGE' | 'CONTAINER',
+        type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'LINK' | 'IMAGE' | 'CONTAINER',
         content?: string,
+        link?: string,
         attributes: ElementAttributes,
         parent: string | null,
         children: string[],
@@ -57,8 +58,7 @@ declare global {
         element?: EditorElement | null,
         attributes?: ElementAttributes | null,
         handleUpdate?: Function,
-        updateName?: Function,
-        updateContent?: Function
+        updateField?: Function
     }
 
     type INotification = {

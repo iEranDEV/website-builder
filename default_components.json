@@ -33,5 +33,26 @@
         },
         "parent": "",
         "children": []
+    },
+    "link": {
+        "id": "",
+        "type": "LINK",
+        "content": "Example link",
+        "attributes": {
+            "width": "100px",
+            "height": "50px",
+            "backgroundColor": "transparent",
+            "color": "#0000FF",
+            "position": "absolute",
+            "top": "0px",
+            "left": "0px",
+            "fontWeight": "normal",
+            "textDecoration": "none",
+            "fontStyle": "normal",
+            "fontSize": "14px"
+        },
+        "link": "none",
+        "parent": "",
+        "children": []
     }
 }

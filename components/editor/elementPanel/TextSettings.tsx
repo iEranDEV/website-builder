@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { BiBold, BiColorFill, BiFontSize, BiItalic, BiUnderline } from "react-icons/bi";
 import { MdContentPaste } from "react-icons/md";
 
-function TextSettings({element, attributes, handleUpdate, updateContent}: ElementSettingsProps) {
+function TextSettings({element, attributes, handleUpdate, updateField}: ElementSettingsProps) {
 
     const textColorRef = useRef<HTMLInputElement>(null);
 
     return (
         <>
-        {attributes && element && handleUpdate && updateContent &&
+        {attributes && element && handleUpdate && updateField &&
             <div className="flex flex-col gap-2">
                 <p className="mono font-bold text-stone-400">Text</p>
 
@@ -16,7 +16,7 @@ function TextSettings({element, attributes, handleUpdate, updateContent}: Elemen
                 <div className="flex items-center gap-2 w-full">
                     <MdContentPaste className="h-6 w-6"></MdContentPaste>
                     <textarea cols={10} rows={3} value={element.content}
-                        onChange={(e) => updateContent(e.target.value)}
+                        onChange={(e) => updateField("content", e.target.value)}
                         className="w-full element-input"
                     />
                 </div>
@@ -31,7 +31,7 @@ function TextSettings({element, attributes, handleUpdate, updateContent}: Elemen
                     <div onClick={() => textColorRef.current?.click()} className="w-6 h-6 rounded-lg border aspect-square cursor-pointer" style={{backgroundColor: attributes.color}}></div>
                     <input type="text" value={attributes.color}
                         onChange={(e) => handleUpdate({...attributes, color: e.target.value})}
-                        className="w-44 element-input"
+                        className="w-[10.5rem] element-input"
                     />
                 </div>
 
