@@ -60,7 +60,7 @@ function ElementPanel() {
     }
 
     return (
-        <div className={`w-64 min-w-[16rem] max-w-[16rem] p-2 h-full bg-neutral-100 border-l border-neutral-400 overflow-x-auto flex flex-col gap-2`}>
+        <div className={`w-64 min-w-[16rem] max-w-[16rem] p-2 h-full bg-white border-l border-neutral-400 overflow-x-auto flex flex-col gap-2`}>
             {element && attributes ?
                 <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-neutral-300 text-neutral-600">
 
@@ -100,14 +100,14 @@ function ElementPanel() {
                             <div onClick={() => backgroundColorRef.current?.click()} className="w-6 h-6 rounded-lg border aspect-square cursor-pointer" style={{backgroundColor: attributes.backgroundColor}}></div>
                             <input type="text" value={attributes.backgroundColor}
                                 onChange={(e) => handleUpdate({...attributes, backgroundColor: e.target.value})}
-                                className="w-full element-input"
+                                className="w-[10.5rem] element-input"
                             />
                         </div>
                     </div>}
 
                     {/* Delete element */}
                     <div className="w-full justiy-center py-2">
-                        <button onClick={handleDelete} className="mono text-red-400 font-semibold w-full p-2 rounded-xl flex justify-center items-center gap-2 border-2 border-red-400 hover:bg-red-400 hover:text-neutral-100">
+                        <button onClick={handleDelete} className="mono text-red-400 font-semibold w-full px-2 py-1 rounded-xl flex justify-center items-center gap-2 border-2 border-red-400 hover:bg-red-400 hover:text-neutral-100">
                             <FiTrash className="h-5 w-5"></FiTrash>
                             <p>Delete element</p>
                         </button>

@@ -1,7 +1,7 @@
 import { StructureContext } from "@/context/StructureContext";
 import { useContext } from "react";
 import { BiText } from "react-icons/bi";
-import { FiSquare } from "react-icons/fi";
+import { FiLink, FiSquare } from "react-icons/fi";
 import ComponentsItem from "./ComponentsItem";
 import StructureTreeElement from "./StructureTreeElement";
 
@@ -20,12 +20,15 @@ function ComponentsPanel() {
         /*
         <ComponentsItem key={'image'} text="Image">
             <FiImage className="h-6 w-6"></FiImage>
-        </ComponentsItem>
+        </ComponentsItem>,
         */
+        <ComponentsItem key={'link'} text="Link">
+            <FiLink className="h-6 w-6"></FiLink>
+        </ComponentsItem>
     ]
 
     return (
-        <div className="w-60 min-w-[15rem] max-w-[15rem] h-full bg-neutral-100 border-r border-neutral-400 overflow-x-auto flex flex-col gap-2 divide-y divide-neutral-400">
+        <div className="w-60 min-w-[15rem] max-w-[15rem] h-full bg-white border-r border-neutral-400 overflow-x-auto flex flex-col gap-2 divide-y divide-neutral-400">
             <div className="w-full h-1/2 flex flex-col gap-2">
                 <p className="p-2 mono text-sm font-bold text-neutral-400">Drag and drop items to add them to your page</p>
                 {items}

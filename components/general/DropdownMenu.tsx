@@ -21,13 +21,13 @@ function DropdownMenu({ options, onChange }: DropdownMenuProps) {
 
     return (
         <div className="w-full relative">
-            <button type="button" onClick={() => setOpen(!open)} className="bg-neutral-200 border border-neutral-300 rounded-xl w-full flex items-center justify-between px-2 py-1">
+            <button type="button" onClick={() => setOpen(!open)} className="bg-neutral-100 border border-neutral-300 rounded-xl w-full flex items-center justify-between px-2 py-1">
                 <p>{selected.text}</p>
                 <IoMdArrowDropdown className="h-4 w-4"></IoMdArrowDropdown>
             </button>
 
             {/* Menu */}
-            {open && <div className="w-full mt-1 rounded-xl flex border border-neutral-400 flex-col z-30 bg-neutral-300 absolute top-full left-0 overflow-hidden text-neutral-800">
+            {open && <div className="w-full mt-1 rounded-xl flex border border-neutral-300 flex-col z-30 bg-neutral-200 absolute top-full left-0 overflow-hidden text-neutral-800">
                 {options.map((item) => {
                     return (
                         <div onClick={(e) => handleSelect(e, item)} className="w-full px-2 py-1 hover:bg-neutral-500/20" key={item.value}>{item.text}</div>

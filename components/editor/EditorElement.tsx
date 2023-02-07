@@ -111,7 +111,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
                 onDragLeave={() => handleDragStatus(false)}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => handleDrop(e)} 
-                className={`${dragStatus && '!bg-neutral-500/50'} absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
+                className={`${dragStatus && '!bg-neutral-400/50'} transition-all absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
                 style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
             </div>}
             {element && <>
