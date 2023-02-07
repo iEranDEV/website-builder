@@ -52,7 +52,7 @@ function ProjectPages() {
         <ProjectWrapper project={project}>
             <div className="w-full h-full overflow-y-auto p-4">
                 <div className="w-full pb-4">
-					<h1 className="text-2xl font-bold mono text-stone-700">Project pages</h1>
+					<h1 className="text-2xl font-bold mono text-neutral-700">Project pages</h1>
 				</div>
                 {pages && <div className="elements-list w-full overflow-x-auto grid gap-2 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
                     {pages?.map((item) => <PageCard key={item.id} page={item} setDeletePageModal={setDeletePageModal}></PageCard>)}

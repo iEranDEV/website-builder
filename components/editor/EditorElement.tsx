@@ -93,7 +93,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
     }
 
     const classes = `whitespace-pre outline-2 
-        ${clickedElement === element?.id && 'outline !outline-sky-500 z-50'}
+        ${clickedElement === element?.id && 'outline !outline-sky-500 outline-offset-2 outline-dashed z-50'}
     `
 
     return (
@@ -111,7 +111,7 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
                 onDragLeave={() => handleDragStatus(false)}
                 onDragOver={(e) => e.preventDefault()}
                 onDrop={(e) => handleDrop(e)} 
-                className={`${dragStatus && '!bg-stone-500/50'} absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
+                className={`${dragStatus && '!bg-neutral-500/50'} absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
                 style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
             </div>}
             {element && <>

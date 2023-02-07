@@ -33,7 +33,7 @@
 }
 
 .element-input {
-    @apply bg-stone-200 border border-stone-300 px-2 py-1 rounded-xl font-semibold;
+    @apply bg-neutral-200 border border-neutral-300 px-2 py-1 rounded-xl font-semibold;
 }
 
 .elements-list:hover > .element-card:not(:hover) {

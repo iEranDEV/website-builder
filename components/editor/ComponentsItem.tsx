@@ -11,7 +11,7 @@ function ComponentsItem({ children, text }: ComponentsItemProps) {
     const structureContext = useContext(StructureContext);
 
     return (
-        <div onDragStart={() => structureContext.setDragElement(text)} onDragEnd={() => structureContext.setDragElement('')} className="w-full h-10 text-stone-700 flex gap-4 items-center cursor-pointer px-2 hover:bg-stone-300/60" draggable>
+        <div onDragStart={() => structureContext.setDragElement(text)} onDragEnd={() => structureContext.setDragElement('')} className="w-full h-10 text-neutral-700 flex gap-4 items-center cursor-pointer px-2 hover:bg-neutral-300/60" draggable>
             {children}
             <p className="mono">{text}</p>
         </div>

@@ -29,17 +29,17 @@ function DeletePageModal({ page, setMenu, removePage}: DeletePageModalProps) {
 
     return (
         <Modal setMenu={setMenu}>
-            <div className="w-full h-full flex flex-col justify-center items-center gap-8 text-stone-700">
+            <div className="w-full h-full flex flex-col justify-center items-center gap-8 text-neutral-700">
                 <div className="w-full flex justify-between items-center gap-8">
                     <h1 className="text-lg mono">Page delete</h1>
                     <FiX onClick={() => setMenu(false)} className="h-5 w-5 cursor-pointer"></FiX>
                 </div>
 
-                <hr className="w-full bg-stone-300 border-0 h-px" />
+                <hr className="w-full bg-neutral-300 border-0 h-px" />
 
                 <p>Do you want to delete page <span className="font-bold text-emerald-500">{page.name}</span> permanently? This action is irreversible.</p>
 
-                <hr className="w-full bg-stone-300 border-0 h-px" />
+                <hr className="w-full bg-neutral-300 border-0 h-px" />
                 
                 <div className="w-full flex justify-between items-center gap-4">
                     <div className="w-1/2">

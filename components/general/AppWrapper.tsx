@@ -17,7 +17,7 @@ function AppWrapper({ children }: { children: JSX.Element }) {
                 </>
             :
                 <div className="w-screen h-screen flex justify-center items-center">
-                    <VscLoading className="h-7 w-7 text-stone-500 animate-spin"></VscLoading>
+                    <VscLoading className="h-7 w-7 text-neutral-500 animate-spin"></VscLoading>
                 </div>
             }
         </>

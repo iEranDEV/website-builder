@@ -60,13 +60,13 @@ function ElementPanel() {
     }
 
     return (
-        <div className={`w-64 min-w-[16rem] max-w-[16rem] p-2 h-full bg-stone-100 border-l border-stone-400 overflow-x-auto flex flex-col gap-2`}>
+        <div className={`w-64 min-w-[16rem] max-w-[16rem] p-2 h-full bg-neutral-100 border-l border-neutral-400 overflow-x-auto flex flex-col gap-2`}>
             {element && attributes ?
-                <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-stone-300 text-stone-600">
+                <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-neutral-300 text-neutral-600">
 
                     {/* Element name */}
                     <div className="flex flex-col gap-2">
-                        <p className="mono font-bold text-stone-400">Name</p>
+                        <p className="mono font-bold text-neutral-400">Name</p>
 
                         <div className="flex items-center gap-2 w-full">
                             <BiRename className="h-6 w-6"></BiRename>
@@ -88,7 +88,7 @@ function ElementPanel() {
                     }
 
                     {element.type !== 'TEXT' && <div className="flex w-full flex-col gap-2">
-                        <p className="mono font-bold text-stone-400">Background</p>
+                        <p className="mono font-bold text-neutral-400">Background</p>
 
                         {/* Background color */}
                         <div className="flex items-center gap-2">
@@ -107,7 +107,7 @@ function ElementPanel() {
 
                     {/* Delete element */}
                     <div className="w-full justiy-center py-2">
-                        <button onClick={handleDelete} className="mono text-red-400 font-semibold w-full p-2 rounded-xl flex justify-center items-center gap-2 border-2 border-red-400 hover:bg-red-400 hover:text-stone-100">
+                        <button onClick={handleDelete} className="mono text-red-400 font-semibold w-full p-2 rounded-xl flex justify-center items-center gap-2 border-2 border-red-400 hover:bg-red-400 hover:text-neutral-100">
                             <FiTrash className="h-5 w-5"></FiTrash>
                             <p>Delete element</p>
                         </button>
@@ -115,7 +115,7 @@ function ElementPanel() {
 
                 </div>
             :
-                <div className="w-full h-full flex flex-col gap-2 justify-center items-center text-stone-400">
+                <div className="w-full h-full flex flex-col gap-2 justify-center items-center text-neutral-400">
                     <RiEmotionSadLine className="h-7 w-7"></RiEmotionSadLine>
                     <p>Select element to edit</p>
                 </div>

@@ -11,11 +11,11 @@ export default function Home() {
                 <FiHome className="h-6 w-6"></FiHome>
             </NavItem>,
 
-			<NavItem key={'account'} text="Account">
+			<NavItem key={'account'} text="Account" disabled>
                 <FiUser className="h-6 w-6"></FiUser>
             </NavItem>,
 
-			<NavItem key={'settings'} text="Settings">
+			<NavItem key={'settings'} text="Settings" disabled>
                 <FiSettings className="h-6 w-6"></FiSettings>
             </NavItem>,
 
@@ -29,7 +29,7 @@ export default function Home() {
 		<Layout navbar={navBarItems()}>
 			<div className="w-full h-full">
 				<div className="w-full p-4 flex flex-col gap-2">
-					<h1 className="text-2xl font-bold mono text-stone-700">Your projects</h1>
+					<h1 className="text-2xl font-bold mono text-neutral-800">Your projects</h1>
 				</div>
 				<ProjectsList></ProjectsList>
 			</div>

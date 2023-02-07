@@ -32,7 +32,7 @@ function StructureTreeElement({ elementID }: {elementID: string}) {
     return (
         <>
             {element && <div className={`w-full`}>
-                <div className={`w-full flex gap-1 hover:bg-stone-300/50 items-center cursor-pointer ${structureContext.clickedElement === elementID && 'font-semibold'}`}>
+                <div className={`w-full flex gap-1 hover:bg-neutral-300/50 text-neutral-700 items-center cursor-pointer ${structureContext.clickedElement === elementID && 'font-semibold'}`}>
                     {element?.children && element.children.length > 0 ? <>
                         {expanded ? 
                             <MdExpandLess onClick={() => setExpanded(false)} className="h-4 w-4"></MdExpandLess>
