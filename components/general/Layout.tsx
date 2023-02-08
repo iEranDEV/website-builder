@@ -13,11 +13,11 @@ function Layout( {children, navbar}: LayoutProps ) {
     return (
         <AppWrapper>
             <div className='w-screen h-screen flex bg-stone-300'>
-                <div className="h-full hidden md:block">
+                <div className="h-full hidden md:block relative z-[210]">
                     <NavBar navbar={navbar}></NavBar>
                 </div>
                 <div className="w-full h-full flex flex-col">
-                    <div className="w-full bg-neutral-100 px-2 border-b border-neutral-400 flex justify-between md:justify-end items-center py-2 relative z-10">
+                    <div className="w-full bg-neutral-100 px-2 border-b border-neutral-400 flex justify-between md:justify-end items-center py-2 relative z-[200]">
                         <div className="md:hidden">
                             <NavBar navbar={navbar}></NavBar>
                         </div>

@@ -1,12 +1,13 @@
 import { db } from "@/firebase";
 import { collection, getDocs } from "firebase/firestore";
 import { useState } from "react";
-import { FiBox, FiCode, FiEye, FiSettings, FiTrash } from "react-icons/fi";
+import { FiBox, FiCode, FiEye, FiImage, FiSettings, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
 import { VscLoading } from "react-icons/vsc";
 import Layout from "../general/Layout";
 import NavItem from "../general/nav/NavItem";
 import DeleteProjectModal from "./DeleteProjectModal";
+import ProjectImages from "./images/ProjectImages";
 
 const getHTMLTag = (val: string) => {
     switch(val) {
@@ -26,6 +27,7 @@ const getHTMLTag = (val: string) => {
 
 function ProjectWrapper({children, project}: {children: JSX.Element, project: Project | null}) {
     const [deleteProjectModal, setDeleteProjectModal] = useState(false);
+    const [imagesModal, setImagesModal] = useState(false);
 
     const navBarItems = () => {
 		return [
@@ -41,8 +43,8 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
                 <FiBox className="h-6 w-6"></FiBox>
             </NavItem>,
 
-            <NavItem key={'preview'} text="Preview" disabled>
-                <FiEye className="h-6 w-6"></FiEye>
+            <NavItem onClick={() => setImagesModal(true)} key={'images'} text="Images">
+                <FiImage className="h-6 w-6"></FiImage>
             </NavItem>,
 
             <NavItem onClick={generate} key={'generate'} text="Generate">
@@ -70,7 +72,11 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
         switch(data.type) {
             case 'LINK':
                 if(data.link) {
-                    (element as HTMLAnchorElement).href = data.link;
+                    if(data.link.includes("url:")) {
+                        (element as HTMLAnchorElement).href = data.link.slice(4);
+                    } else if(data.link.includes("page:")) {
+                        (element as HTMLAnchorElement).href = data.link.slice(5) + '.html';
+                    }
                 }
                 break;
         }
@@ -118,6 +124,7 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
                 <>
                     {children}
                     {deleteProjectModal && <DeleteProjectModal project={project} setMenu={setDeleteProjectModal}></DeleteProjectModal>}
+                    {imagesModal && <ProjectImages setMenu={setImagesModal}></ProjectImages>}
                 </>
             :
                 <div className="w-screen h-screen flex justify-center items-center">

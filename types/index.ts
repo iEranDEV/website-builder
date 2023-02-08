@@ -41,7 +41,6 @@ declare global {
         textDecoration?: string,
         fontStyle?: string,
         fontSize?: string,
-        textAlign?: string,
         display?: string,
         justifyContent?: string,
         alignItems?: string
@@ -53,6 +52,10 @@ declare global {
         type: 'ROOT_ELEMENT' | 'SECTION' | 'TEXT' | 'LINK' | 'IMAGE' | 'CONTAINER',
         content?: string,
         link?: string,
+        image?: {
+            id: string,
+            src: string,
+        },
         attributes: ElementAttributes,
         parent: string | null,
         children: string[],
@@ -69,5 +72,13 @@ declare global {
         id: string,
         type: 'SUCCESS' | 'ERROR',
         message: string
+    }
+
+    type Image = {
+        id: string,
+        uploaded: Timestamp,
+        url: string,
+        name: string,
+        type: string
     }
 }

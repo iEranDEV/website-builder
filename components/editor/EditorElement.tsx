@@ -11,7 +11,7 @@ type EditorElementProps = {
 function EditorElement({ elementID, clickedElement, setClickedElement }: EditorElementProps) {
     const [dragStatus, setDragStatus] = useState(false);
 
-    const elementRef = useRef<HTMLDivElement>(null);
+    const elementRef = useRef<any>(null);
 
     const structure = useContext(StructureContext);
     const element = structure.structure.find((item) => item.id === elementID);
@@ -44,7 +44,6 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
     const handleMouseUp = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
         if(element?.type !== 'ROOT_ELEMENT') {
-            // Calc new position
             const x = structure.movedElement.posX;
             const y = structure.movedElement.posY;
             const newElement = structuredClone(structure.structure.find((item) => item.id === structure.movedElement.id));
@@ -92,32 +91,44 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
         }
     }
 
-    return (
-        <div onMouseUp={(e) => element?.children.includes(structure.movedElement.id) && handleMouseUp(e)} 
-            onMouseMove={(e) => element?.children.includes(structure.movedElement.id) && handleMouseMove(e)}
-            onMouseDown={(e) => moveable && handleMouseDown(e)} 
-            onMouseLeave={handleMouseLeave}
-            ref={elementRef} 
-            onClick={(e) => handleClick(e)} 
-            id={'element_' + elementID}
-            style={element?.attributes} 
-            className={`whitespace-pre outline-2 ${clickedElement === element?.id && '!outline-sky-500 outline-offset-2 outline-dashed z-50'}`}
-        >
-            {<div onDragEnter={() => handleDragStatus(true)} 
-                onDragLeave={() => handleDragStatus(false)}
-                onDragOver={(e) => e.preventDefault()}
-                onDrop={handleDrop} 
-                className={`${dragStatus && '!bg-neutral-400/50'} transition-all absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
-                style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
-            </div>}
-            {element && <>
-                {element.content}
-                {element.children.map((elementID) => {
-                    return <EditorElement key={elementID} elementID={elementID} clickedElement={clickedElement} setClickedElement={setClickedElement}></EditorElement>
-                })}
-            </>}
-        </div>
-    )
+    let elementProps = {
+        style: element?.attributes,
+        onClick: (e: React.MouseEvent<HTMLDivElement | HTMLImageElement, MouseEvent>) => handleClick(e),
+        id: 'element_' + elementID,
+        className: `whitespace-pre outline-2 ${clickedElement === element?.id && '!outline-sky-500 outline-offset-2 outline-dashed z-50'}`,
+    }
+
+
+    if(element?.type === 'IMAGE') {
+        return (
+            <img draggable={false} src={element.image?.src} {...elementProps}>
+            </img>
+        )
+    } else {
+        return (
+            <div {...elementProps} 
+                onMouseUp={(e: React.MouseEvent<HTMLDivElement | HTMLImageElement, MouseEvent>) => element?.children.includes(structure.movedElement.id) && handleMouseUp(e)}
+                onMouseMove={(e: React.MouseEvent<HTMLDivElement | HTMLImageElement, MouseEvent>) => element?.children.includes(structure.movedElement.id) && handleMouseMove(e)}
+                onMouseDown={(e: React.MouseEvent<HTMLDivElement | HTMLImageElement, MouseEvent>) => moveable && handleMouseDown(e)}
+                onMouseLeave={handleMouseLeave}
+                ref={elementRef}
+            >
+                {<div onDragEnter={() => handleDragStatus(true)} 
+                    onDragLeave={() => handleDragStatus(false)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDrop={handleDrop} 
+                    className={`${dragStatus && '!bg-neutral-400/50'} transition-all absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
+                    style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
+                </div>}
+                {element && <>
+                    {element.content}
+                    {element.children.map((elementID) => {
+                        return <EditorElement key={elementID} elementID={elementID} clickedElement={clickedElement} setClickedElement={setClickedElement}></EditorElement>
+                    })}
+                </>}
+            </div>
+        )
+    }
 
 }
 

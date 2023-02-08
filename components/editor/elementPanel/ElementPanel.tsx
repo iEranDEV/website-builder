@@ -4,6 +4,7 @@ import { BiColorFill, BiLeftArrow, BiRename, BiRightArrow } from "react-icons/bi
 import { FiTrash } from "react-icons/fi";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import DimensionsSettings from "./DimensionsSettings";
+import ImageSettings from "./ImageSettings";
 import LinkSettings from "./LinkSettings";
 import SpacingSettings from "./SpacingSettings";
 import TextSettings from "./TextSettings";
@@ -13,7 +14,8 @@ const typeAccess = {
     text: ['TEXT', 'LINK'],
     backgroundColor: ['CONTAINER', 'SECTION'],
     link: ['LINK'],
-    spacing: ['SECTION', 'CONTAINER']
+    spacing: ['SECTION', 'CONTAINER'],
+    image: ['IMAGE']
 }
 
 function ElementPanel() {
@@ -63,7 +65,7 @@ function ElementPanel() {
     }
 
     return (
-        <div className={`${!show ? 'w-0' : 'w-96 max-w-[16rem]'} h-[calc(100vh-37px)] transition-all duration-300 z-50 relative bg-white border-l border-neutral-400`}>
+        <div className={`${!show ? 'w-0' : 'w-96 max-w-[16rem]'} h-[calc(100vh-37px)] transition-all duration-300 relative bg-white border-l border-neutral-400`}>
             
             {/* Toggler */}
             <div onClick={() => setShow(!show)} className={`z-20 absolute cursor-pointer h-7 w-7 bg-white text-neutral-700 flex justify-center items-center border border-neutral-400 bottom-4 ${show ? '-left-3' : '-left-12'}`}>
@@ -76,7 +78,7 @@ function ElementPanel() {
 
             {show && <>
                 {(element && attributes) ?
-                    <div className="relative z-10 p-2 pb-12 h-full overflow-y-auto w-full flex flex-col gap-4 divide-neutral-300 text-neutral-600">
+                    <div className="relative z-[60] p-2 pb-12 h-full overflow-y-auto w-full flex flex-col gap-4 divide-neutral-300 text-neutral-600">
 
                         {/* Element name */}
                         <div className="flex flex-col gap-2">
@@ -102,6 +104,11 @@ function ElementPanel() {
                         {/* Link */}
                         {typeAccess.link.includes(element.type) && 
                             <LinkSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></LinkSettings>
+                        }
+
+                        {/* Image */}
+                        {typeAccess.image.includes(element.type) &&
+                            <ImageSettings element={element} updateField={updateField}></ImageSettings>
                         }
 
                         {/* Spacing */}

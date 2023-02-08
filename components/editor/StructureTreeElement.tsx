@@ -2,7 +2,7 @@ import { StructureContext } from "@/context/StructureContext";
 import { useContext, useEffect, useState } from "react";
 import { MdExpandLess, MdExpandMore } from "react-icons/md";
 import { TbNewSection } from "react-icons/tb";
-import { FiLink, FiSquare } from "react-icons/fi";
+import { FiImage, FiLink, FiSquare } from "react-icons/fi";
 import { BiText } from "react-icons/bi";
 
 function StructureTreeElement({ elementID }: {elementID: string}) {
@@ -27,7 +27,9 @@ function StructureTreeElement({ elementID }: {elementID: string}) {
             case 'TEXT':
                 return <BiText></BiText>;
             case 'LINK':
-                return <FiLink></FiLink>
+                return <FiLink></FiLink>;
+            case 'IMAGE':
+                return <FiImage></FiImage>
         }
     }
 
