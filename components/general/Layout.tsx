@@ -14,7 +14,7 @@ function Layout( {children, navbar}: LayoutProps ) {
     return (
         <AppWrapper>
             <>
-                <div className='hidden md:flex w-screen h-screen bg-stone-300'>
+                <div className='hidden md:flex w-screen h-screen bg-neutral-300'>
                     <div className="h-full hidden md:block relative z-[210]">
                         <NavBar navbar={navbar}></NavBar>
                     </div>
