@@ -1,7 +1,7 @@
 import DropdownMenu from "@/components/general/DropdownMenu";
 import { useEffect, useState } from "react";
 import { AiOutlineColumnHeight, AiOutlineColumnWidth, AiOutlinePlus } from "react-icons/ai";
-import { BiArrowFromBottom, BiArrowFromLeft, BiArrowFromRight, BiArrowFromTop, BiArrowToLeft } from "react-icons/bi";
+import { BiArrowFromBottom, BiArrowFromLeft, BiArrowFromRight, BiArrowFromTop } from "react-icons/bi";
 
 function DimensionsSettings({ element, attributes, handleUpdate}: ElementSettingsProps) {
     const [widthType, setWidthType] = useState('px');
@@ -13,7 +13,7 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
 
         if(attributes?.height.includes('%')) setHeightType('%');
         else if(attributes?.height.includes('rem')) setHeightType('rem');
-    }, [attributes]);
+    }, []);
 
     const parse = (val: string) => {
         const str = val.replace('px', '').replace('%', '').replace('rem', '');
@@ -85,7 +85,7 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
             <div className="flex flex-col gap-2">
                 <p className="mono font-bold text-stone-400">Dimensions</p>
                 
-                {element?.type !== 'SECTION' && <div className="flex w-full gap-2">
+                {(element?.type !== 'SECTION' && element?.attributes.position === 'absolute') && <div className="flex w-full gap-2">
                     {/* X axis */}
                     <div className="w-1/2 flex gap-2 items-center">
                         {getAxisIcon('X')}
@@ -113,7 +113,7 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
                         className="w-32 element-input"
                     />
                     <div className="w-20">
-                        <DropdownMenu options={[
+                        <DropdownMenu value={{value: widthType, text: widthType}} options={[
                             {value: 'px', text: 'px'}, 
                             {value: '%', text: '%'}, 
                             {value: 'rem', text: 'rem'}
@@ -132,7 +132,7 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
                         className="w-32 element-input"
                     />
                     <div className="w-20">
-                        <DropdownMenu options={[
+                        <DropdownMenu value={{value: heightType, text: heightType}} options={[
                             {value: 'px', text: 'px'}, 
                             {value: '%', text: '%'}, 
                             {value: 'rem', text: 'rem'}
@@ -145,7 +145,7 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
 
 
                 {/* Constraints */}
-                {element?.type !== 'SECTION' && <div className="h-32 py-2 flex justify-between items-center">
+                {(element?.type !== 'SECTION' && element?.attributes.position === 'absolute') && <div className="h-32 py-2 flex justify-between items-center">
                     {/* Visual box */}
                     <div className="w-28 h-auto aspect-square flex justify-center items-center">
                         <div className="relative w-16 h-16 border-2 border-neutral-500 rounded-lg flex justify-center items-center">
@@ -164,11 +164,11 @@ function DimensionsSettings({ element, attributes, handleUpdate}: ElementSetting
 
                     {/* Values dropdowns */}
                     <div className="w-24 h-full flex flex-col justify-around items-end">
-                        <DropdownMenu options={[
+                        <DropdownMenu value={attributes.left ? {value: 'left', text: 'Left'} : {value: 'right', text: 'Right'}} options={[
                             {value: 'left', text: 'Left'}, 
                             {value: 'right', text: 'Right'}, 
                         ]} onChange={(val: string) => updateDimension(val)}></DropdownMenu>
-                        <DropdownMenu options={[
+                        <DropdownMenu value={attributes.top ? {value: 'top', text: 'Top'} : {value: 'bottom', text: 'Bottom'}} options={[
                             {value: 'top', text: 'Top'}, 
                             {value: 'bottom', text: 'Bottom'}, 
                         ]} onChange={(val: string) => updateDimension(val)}></DropdownMenu>

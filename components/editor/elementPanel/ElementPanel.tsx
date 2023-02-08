@@ -74,11 +74,11 @@ function ElementPanel() {
 
             {show && <>
                 {(element && attributes) ?
-                    <div className="relative z-10 p-2 h-full overflow-y-auto w-full flex flex-col gap-4 divide-neutral-300 text-neutral-600">
+                    <div className="relative z-10 p-2 pb-12 h-full overflow-y-auto w-full flex flex-col gap-4 divide-neutral-300 text-neutral-600">
 
                         {/* Element name */}
                         <div className="flex flex-col gap-2">
-                            <p className="mono font-bold text-neutral-400">Name</p>
+                            <p className="mono font-bold text-neutral-400">Element data</p>
 
                             <div className="flex items-center gap-2 w-full">
                                 <BiRename className="h-6 w-6"></BiRename>
@@ -87,19 +87,24 @@ function ElementPanel() {
                                     className="w-full element-input"
                                 />
                             </div>
+
+                            {element.type !== 'SECTION' && <div className="w-full flex gap-2 items-center justify-between text-neutral-700">
+                                <p>Moveable</p>
+                                <input type="checkbox" checked={attributes.position === 'absolute'} onChange={(e) => e.target.checked ? handleUpdate({...attributes, position: "absolute"}) : handleUpdate({...attributes, position: "static"})} />
+                            </div>}
                         </div>
 
                         {/* Dimensions */}
                         <DimensionsSettings element={element} attributes={attributes} handleUpdate={handleUpdate}></DimensionsSettings>
 
-                        {/* Text */}
-                        {typeAccess.text.includes(element.type) && 
-                            <TextSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></TextSettings>
-                        }
-
                         {/* Link */}
                         {typeAccess.link.includes(element.type) && 
                             <LinkSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></LinkSettings>
+                        }
+
+                        {/* Text */}
+                        {typeAccess.text.includes(element.type) && 
+                            <TextSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></TextSettings>
                         }
 
                         {typeAccess.backgroundColor.includes(element.type) && <div className="flex w-full flex-col gap-2">

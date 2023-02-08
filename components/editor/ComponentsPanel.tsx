@@ -6,7 +6,7 @@ import ComponentsItem from "./ComponentsItem";
 import StructureTreeElement from "./StructureTreeElement";
 
 function ComponentsPanel() {
-    const [show, setShow] = useState(false);
+    const [show, setShow] = useState(true);
 
     const structureContext = useContext(StructureContext);
     const structure = structureContext.structure;

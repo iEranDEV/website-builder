@@ -18,7 +18,7 @@ function NotificationsWrapper({ children }: { children: JSX.Element }) {
         <NotificationsContext.Provider value={{addNotification: addNotification}}>
             <>
             {children}
-            <div className="fixed bottom-0 right-0 flex flex-col p-2 gap-2">
+            <div className="z-[100] fixed bottom-0 right-0 flex flex-col p-2 gap-2">
                 {notifications.map((item) => <NotificationElement key={item.id} notification={item} removeNotification={removeNotification}></NotificationElement>)}
             </div>
             </>

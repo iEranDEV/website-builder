@@ -16,6 +16,8 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
     const structure = useContext(StructureContext);
     const element = structure.structure.find((item) => item.id === elementID);
 
+    const moveable = element?.attributes.position === 'absolute';
+
     const handleDragStatus = (status: boolean) => {
         if(element?.type !== 'ROOT_ELEMENT') {
             setDragStatus(status);
@@ -79,39 +81,32 @@ function EditorElement({ elementID, clickedElement, setClickedElement }: EditorE
         }
     }
 
-    const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        const rect = (e.target as HTMLDivElement).getBoundingClientRect();
+    const handleDrop = () => {
         if(element?.type !== 'ROOT_ELEMENT') {
             setDragStatus(false);
             console.log(structure.dragElement);
             const newElement = structuredClone((defaultComponents as any)[structure.dragElement.toLowerCase()]) as EditorElement;
             newElement.id = crypto.randomUUID();
             newElement.parent = element ? element.id : null;
-            newElement.attributes.top = (e.clientY - rect.top) + 'px';
-            newElement.attributes.left = (e.clientX - rect.left) + 'px';
             structure.addElement(newElement);
         }
     }
 
-    const classes = `whitespace-pre outline-2 
-        ${clickedElement === element?.id && 'outline !outline-sky-500 outline-offset-2 outline-dashed z-50'}
-    `
-
     return (
         <div onMouseUp={(e) => element?.children.includes(structure.movedElement.id) && handleMouseUp(e)} 
             onMouseMove={(e) => element?.children.includes(structure.movedElement.id) && handleMouseMove(e)}
-            onMouseDown={(e) => handleMouseDown(e)} 
+            onMouseDown={(e) => moveable && handleMouseDown(e)} 
             onMouseLeave={handleMouseLeave}
             ref={elementRef} 
             onClick={(e) => handleClick(e)} 
             id={'element_' + elementID}
             style={element?.attributes} 
-            className={classes}
+            className={`whitespace-pre outline-2 ${clickedElement === element?.id && '!outline-sky-500 outline-offset-2 outline-dashed z-50'}`}
         >
             {<div onDragEnter={() => handleDragStatus(true)} 
                 onDragLeave={() => handleDragStatus(false)}
                 onDragOver={(e) => e.preventDefault()}
-                onDrop={(e) => handleDrop(e)} 
+                onDrop={handleDrop} 
                 className={`${dragStatus && '!bg-neutral-400/50'} transition-all absolute ${structure.dragElement !== '' ? 'block bg-transparent' : 'hidden'}`} 
                 style={{width: elementRef.current?.clientWidth, height: elementRef.current?.clientHeight}}>
             </div>}

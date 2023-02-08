@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdArrowDropdown } from 'react-icons/io';
 
 type DropdownMenuProps = {
     options: Array<{value: string, text: string}>,
-    onChange: Function
+    onChange: Function,
+    value: {value: string, text: string}
 }
 
-function DropdownMenu({ options, onChange }: DropdownMenuProps) {
-    const [selected, setSelected] = useState(options[0]);
+function DropdownMenu({ options, onChange, value }: DropdownMenuProps) {
+    const [selected, setSelected] = useState({...value});
     const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        if(value) setSelected(value);
+    }, [])
 
     const handleSelect = (e: React.MouseEvent<HTMLDivElement, MouseEvent>, val: {value: string, text: string}) => {
         e.stopPropagation()

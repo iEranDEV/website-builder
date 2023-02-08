@@ -21,7 +21,8 @@
             "height": "200px",
             "backgroundColor": "#AAA",
             "color": "#555555",
-            "position": "relative"
+            "position": "relative",
+            "display": "flex"
         },
         "parent": "ROOT_ELEMENT",
         "children": []

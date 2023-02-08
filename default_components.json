@@ -7,9 +7,8 @@
             "height": "100px",
             "backgroundColor": "#FF0000",
             "color": "#FFFFFF",
-            "position": "absolute",
-            "top": "0px",
-            "left": "0px"
+            "position": "relative",
+            "display": "flex"
         },
         "parent": "",
         "children": []
@@ -23,7 +22,7 @@
             "height": "50px",
             "backgroundColor": "transparent",
             "color": "#000000",
-            "position": "absolute",
+            "position": "static",
             "top": "0px",
             "left": "0px",
             "fontWeight": "normal",
@@ -43,7 +42,7 @@
             "height": "50px",
             "backgroundColor": "transparent",
             "color": "#0000FF",
-            "position": "absolute",
+            "position": "static",
             "top": "0px",
             "left": "0px",
             "fontWeight": "normal",
@@ -51,7 +50,7 @@
             "fontStyle": "normal",
             "fontSize": "14px"
         },
-        "link": "none",
+        "link": "",
         "parent": "",
         "children": []
     }

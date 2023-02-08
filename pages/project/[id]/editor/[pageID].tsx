@@ -37,10 +37,6 @@ function Editor() {
                 }
             }
             syncData();
-
-            return () => {
-                save();
-            }
         }
     }, [id, pageID]);
 
