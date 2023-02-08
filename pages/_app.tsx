@@ -7,7 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<UserContextProvider>
 			<NotificationsWrapper>
-				<div className='overflow-x-hidden'>
+				<div className='w-screen h-screen overflow-hidden'>
 					<Component {...pageProps} />
 				</div>
 			</NotificationsWrapper>

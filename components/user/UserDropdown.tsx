@@ -1,4 +1,5 @@
 import { UserContext } from "@/context/UserContext";
+import { auth } from "@/firebase";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -15,6 +16,7 @@ function UserDropdown() {
 
     const handleLogOut = () => {
         userContext.setUser(null);
+        auth.signOut();
         router.push('/account/login');
     }
 

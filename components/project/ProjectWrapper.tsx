@@ -74,7 +74,6 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
         // Apply specific values (links, images, ...)
         switch(data.type) {
             case 'LINK':
-                console.log(data.link)
                 if(data.link) {
                     if(data.link.includes("url:")) {
                         (element as HTMLAnchorElement).href = data.link.slice(4);

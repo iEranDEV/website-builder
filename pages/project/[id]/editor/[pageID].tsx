@@ -28,7 +28,6 @@ function Editor() {
             const syncData = async () => {
                 const docSnap = await getDoc(doc(db, "projects/" + id + '/pages/' + pageID));
                 if(docSnap.exists()) {
-                    console.log('loaded editor');
                     const newPage = docSnap.data() as Page;
                     setPage(newPage);
                     setStructure(newPage.structure);
