@@ -81,7 +81,6 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                                         <p className="text-neutral-400">{image.uploaded.toDate().toLocaleDateString()}</p>
                                     </div>
                                     <div className="w-1/2 flex justify-end gap-2 items-end">
-                                        <FiEdit onClick={(e) => e.stopPropagation()} className="h-5 w-5 cursor-pointer hover:text-sky-500"></FiEdit>
                                         <FiTrash onClick={(e) => e.stopPropagation()} className="h-5 w-5 cursor-pointer hover:text-red-500"></FiTrash>
                                     </div>
                                 </div>

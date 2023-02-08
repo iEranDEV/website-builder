@@ -18,7 +18,7 @@ function LinkSettings({element, attributes, handleUpdate, updateField}: ElementS
         querySnapshot.forEach((doc) => {
             const data = doc.data() as Page;
             if(data.id !== router.query.pageID) {
-                arr.push({value: data.id, text: data.name});
+                arr.push({value: data.name, text: data.name});
             }
         })
         setProjectPages(arr);
@@ -38,7 +38,11 @@ function LinkSettings({element, attributes, handleUpdate, updateField}: ElementS
 
     const handleTypeChange = (val: string) => {
         setLinkType(val);
-        updateField("link", "");
+        if(val === 'local') {
+            updateField("link", "page:" + projectPages[0].value)
+        } else {
+            updateField("link", "");
+        }
     }
 
     return (

@@ -60,7 +60,7 @@ function RegisterPage() {
         <div className="w-screen h-screen bg-neutral-100 flex justify-center items-center p-4">
             <div className="p-4 rounded-xl w-96 flex flex-col justify-between items-center gap-4 text-neutral-700">
                 <div className="w-full flex flex-col gap-1 items-center justify-center">
-                <h1 className="font-bold text-emerald-500 text-3xl mono">Let's get started</h1>
+                <h1 className="font-bold text-emerald-500 text-3xl mono">Lets get started</h1>
                 <p>Have an account? <Link href='/account/login' className="text-emerald-500 font-semibold underline">Log in</Link></p>
                 </div>
                 

@@ -54,6 +54,7 @@ declare global {
         link?: string,
         image?: {
             id: string,
+            name: string,
             src: string,
         },
         attributes: ElementAttributes,

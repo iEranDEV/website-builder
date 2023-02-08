@@ -54,7 +54,7 @@ function LoginPage() {
             <div className="p-4 rounded-xl w-96 flex flex-col justify-between items-center gap-4 text-neutral-700">
                 <div className="w-full flex flex-col gap-1 items-center justify-center">
                 <h1 className="font-bold text-emerald-500 text-3xl mono">Welcome back</h1>
-                <p>Don't have an account? <Link href='/account/register' className="text-emerald-500 font-semibold underline">Sign up</Link></p>
+                <p>Dont have an account? <Link href='/account/register' className="text-emerald-500 font-semibold underline">Sign up</Link></p>
                 </div>
                 
                 <hr className="border w-full border-neutral-300" />

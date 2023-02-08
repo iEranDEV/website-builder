@@ -9,7 +9,7 @@ function ImageSettings({element, updateField}: ElementSettingsProps) {
     if(!updateField) return null;
 
     const handlePick = (image: Image) => {
-        updateField("image", {id: image.id, src: image.url});
+        updateField("image", {id: image.id, src: image.url, name: image.name});
     }
 
     return (

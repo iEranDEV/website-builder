@@ -1,5 +1,8 @@
 import { db } from "@/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDoc, getDocs } from "firebase/firestore";
+import JSZip from "jszip";
+// @ts-ignore
+import { saveAs } from 'file-saver';
 import { useState } from "react";
 import { FiBox, FiCode, FiEye, FiImage, FiSettings, FiTrash } from "react-icons/fi";
 import { IoArrowBackOutline } from "react-icons/io5";
@@ -71,12 +74,18 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
         // Apply specific values (links, images, ...)
         switch(data.type) {
             case 'LINK':
+                console.log(data.link)
                 if(data.link) {
                     if(data.link.includes("url:")) {
                         (element as HTMLAnchorElement).href = data.link.slice(4);
                     } else if(data.link.includes("page:")) {
                         (element as HTMLAnchorElement).href = data.link.slice(5) + '.html';
                     }
+                }
+                break;
+            case 'IMAGE':
+                if(data.image?.src) {
+                    (element as HTMLImageElement).src = 'img/' + data.image?.name;
                 }
                 break;
         }
@@ -93,6 +102,7 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
 
     const generate = async () => {
         const querySnapshot = await getDocs(collection(db, "projects/" + project?.id + '/pages/'));
+        const jszip = new JSZip();
         querySnapshot.forEach((doc) => {
             const page = doc.data() as Page;
             const structure = page.structure
@@ -110,12 +120,18 @@ function ProjectWrapper({children, project}: {children: JSX.Element, project: Pr
             })
             pageDocument.body.appendChild(rootElement);
 
-            const link = document.createElement("a");
             const blob = new Blob([new XMLSerializer().serializeToString(pageDocument)], {type: 'text/html'});
-            link.href = window.URL.createObjectURL(blob);
-            link.download = page.name + ".html";
-            link.click();
+            jszip.file(page.name + '.html', blob);
+        });
+        const imagesSnapshot = await getDocs(collection(db, "projects/" + project?.id + '/images/'));
+        imagesSnapshot.forEach(async (doc) => {
+            const image = doc.data() as Image;
+            const imageBlob = await (await fetch(image.url)).blob();
+            jszip.file('img/' + image.name, imageBlob);
         })
+        setTimeout(() => {
+            jszip.generateAsync({ type: 'blob' }).then((blob) => saveAs(blob, project?.name + '.zip'))
+        }, 1000);
     }
 
     return (
