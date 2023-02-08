@@ -22,7 +22,9 @@
             "backgroundColor": "#AAA",
             "color": "#555555",
             "position": "relative",
-            "display": "flex"
+            "display": "flex",
+            "justifyContent": "start",
+            "alignItems": "start"
         },
         "parent": "ROOT_ELEMENT",
         "children": []

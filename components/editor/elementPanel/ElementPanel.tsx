@@ -5,13 +5,15 @@ import { FiTrash } from "react-icons/fi";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import DimensionsSettings from "./DimensionsSettings";
 import LinkSettings from "./LinkSettings";
+import SpacingSettings from "./SpacingSettings";
 import TextSettings from "./TextSettings";
 
 const typeAccess = {
     dimension: ['CONTAINER', 'LINK', 'TEXT'],
     text: ['TEXT', 'LINK'],
     backgroundColor: ['CONTAINER', 'SECTION'],
-    link: ['LINK']
+    link: ['LINK'],
+    spacing: ['SECTION', 'CONTAINER']
 }
 
 function ElementPanel() {
@@ -100,6 +102,11 @@ function ElementPanel() {
                         {/* Link */}
                         {typeAccess.link.includes(element.type) && 
                             <LinkSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></LinkSettings>
+                        }
+
+                        {/* Spacing */}
+                        {typeAccess.spacing.includes(element.type) && 
+                            <SpacingSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></SpacingSettings>
                         }
 
                         {/* Text */}

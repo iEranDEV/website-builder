@@ -36,15 +36,14 @@ function TextSettings({element, attributes, handleUpdate, updateField}: ElementS
                 </div>
 
                 {/* Font */}
-                <div className="flex items-center w-full gap-2 justify-between">
+                <div className="grid grid-cols-2 w-full gap-2">
                     {/* Font size */}
                     <div className="flex items-center gap-2 w-full">
                         <BiFontSize className="h-6 w-6"></BiFontSize>
                         <input type="number" value={Number.parseInt(attributes.fontSize?.substring(0, attributes.fontSize.length - 2) as string)}
                             onChange={(e) => handleUpdate({...attributes, fontSize: e.target.value + 'px'})}
-                            className="w-16 element-input"
+                            className="w-full element-input"
                         />
-                        <p>px</p>
                     </div>
 
                     {/* Text attributes */}
@@ -53,21 +52,21 @@ function TextSettings({element, attributes, handleUpdate, updateField}: ElementS
                         <button onClick={() => {
                             if(attributes.fontWeight === 'normal') handleUpdate({...attributes, fontWeight: 'bold'});
                             else handleUpdate({...attributes, fontWeight: 'normal'});
-                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.fontWeight === 'bold' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-100 border rounded flex justify-center items-center ${attributes.fontWeight === 'bold' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
                             <BiBold className="h-5 w-5"></BiBold>
                         </button>
                         {/* Italic */}
                         <button onClick={() => {
                             if(attributes.fontStyle === 'normal') handleUpdate({...attributes, fontStyle: 'italic'});
                             else handleUpdate({...attributes, fontStyle: 'normal'});
-                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.fontStyle === 'italic' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-100 border rounded flex justify-center items-center ${attributes.fontStyle === 'italic' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
                             <BiItalic className="h-5 w-5"></BiItalic>
                         </button>
                         {/* Underline */}
                         <button onClick={() => {
                             if(attributes.textDecoration === 'none') handleUpdate({...attributes, textDecoration: 'underline'});
                             else handleUpdate({...attributes, textDecoration: 'none'});
-                        }} className={`h-7 w-7 bg-stone-200 border rounded flex justify-center items-center ${attributes.textDecoration === 'underline' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
+                        }} className={`h-7 w-7 bg-stone-100 border rounded flex justify-center items-center ${attributes.textDecoration === 'underline' ? 'border-sky-500 text-sky-500' : 'border-neutral-400 text-neutral-700'}`}>
                             <BiUnderline className="h-5 w-5"></BiUnderline>
                         </button>
                     </div>

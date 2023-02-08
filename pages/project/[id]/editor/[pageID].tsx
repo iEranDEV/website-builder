@@ -52,7 +52,10 @@ function Editor() {
                 height: '200px',
                 backgroundColor: '#FFFFFF',
                 color: '#FFFFFF',
-                position: "relative"
+                position: "relative",
+                display: "flex",
+                justifyContent: "start",
+                alignItems: "start"
             },
             parent: structure.find((item) => item.type === 'ROOT_ELEMENT')?.id as string,
             children: []

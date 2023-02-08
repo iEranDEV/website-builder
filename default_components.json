@@ -8,7 +8,9 @@
             "backgroundColor": "#FF0000",
             "color": "#FFFFFF",
             "position": "relative",
-            "display": "flex"
+            "display": "flex",
+            "justifyContent": "start",
+            "alignItems": "start"
         },
         "parent": "",
         "children": []
@@ -28,7 +30,8 @@
             "fontWeight": "normal",
             "textDecoration": "none",
             "fontStyle": "normal",
-            "fontSize": "14px"
+            "fontSize": "14px",
+            "textAlign": "left"
         },
         "parent": "",
         "children": []
@@ -48,7 +51,8 @@
             "fontWeight": "normal",
             "textDecoration": "none",
             "fontStyle": "normal",
-            "fontSize": "14px"
+            "fontSize": "14px",
+            "textAlign": "left"
         },
         "link": "",
         "parent": "",

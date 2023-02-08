@@ -41,6 +41,10 @@ declare global {
         textDecoration?: string,
         fontStyle?: string,
         fontSize?: string,
+        textAlign?: string,
+        display?: string,
+        justifyContent?: string,
+        alignItems?: string
     }
 
     type EditorElement = {
