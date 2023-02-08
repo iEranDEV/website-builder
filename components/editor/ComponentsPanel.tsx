@@ -29,7 +29,7 @@ function ComponentsPanel() {
     ]
 
     return (
-        <div className={`${!show ? 'w-0' : 'w-96 max-w-[15rem]'} transition-all duration-300 z-50 relative h-full bg-white border-r border-neutral-400 flex flex-col gap-2 divide-y divide-neutral-400`}>
+        <div className={`${!show ? 'w-0 z-50' : 'w-96 max-w-[15rem] z-20'} transition-all duration-300 relative h-full bg-white border-r border-neutral-400 flex flex-col gap-2 divide-y divide-neutral-400`}>
             
             {/* Toggler */}
             <div onClick={() => setShow(!show)} className="absolute cursor-pointer h-7 w-7 bg-white text-neutral-700 flex justify-center items-center border border-neutral-400 bottom-4 -right-3">
@@ -41,11 +41,11 @@ function ComponentsPanel() {
             </div>
 
             {show && <>
-                <div className="w-full h-1/2 flex flex-col gap-2">
+                <div className="w-full h-1/2 overflow-y-auto flex flex-col gap-2">
                     <p className="p-2 mono text-sm font-bold text-neutral-400">Drag and drop items to add them to your page</p>
                     {items}
                 </div>
-                <div className="w-full h-1/2 flex flex-col p-2">
+                <div className="w-full h-1/2 overflow-y-auto flex flex-col p-2">
                     {structure.filter((item) => item.type === 'SECTION').map((item) => {
                         return (
                             <StructureTreeElement key={item.id} elementID={item.id}></StructureTreeElement>

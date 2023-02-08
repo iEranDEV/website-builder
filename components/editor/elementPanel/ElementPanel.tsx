@@ -4,12 +4,14 @@ import { BiColorFill, BiLeftArrow, BiRename, BiRightArrow } from "react-icons/bi
 import { FiTrash } from "react-icons/fi";
 import { RiEmotionSadLine } from 'react-icons/ri'
 import DimensionsSettings from "./DimensionsSettings";
+import LinkSettings from "./LinkSettings";
 import TextSettings from "./TextSettings";
 
 const typeAccess = {
     dimension: ['CONTAINER', 'LINK', 'TEXT'],
     text: ['TEXT', 'LINK'],
-    backgroundColor: ['CONTAINER', 'SECTION']
+    backgroundColor: ['CONTAINER', 'SECTION'],
+    link: ['LINK']
 }
 
 function ElementPanel() {
@@ -59,10 +61,10 @@ function ElementPanel() {
     }
 
     return (
-        <div className={`${!show ? 'w-0' : 'w-96 p-2 max-w-[16rem]'} transition-all duration-300 z-50 relative h-full bg-white border-l border-neutral-400 flex flex-col gap-2`}>
+        <div className={`${!show ? 'w-0' : 'w-96 max-w-[16rem]'} h-[calc(100vh-37px)] transition-all duration-300 z-50 relative bg-white border-l border-neutral-400`}>
             
             {/* Toggler */}
-            <div onClick={() => setShow(!show)} className={`absolute cursor-pointer h-7 w-7 bg-white text-neutral-700 flex justify-center items-center border border-neutral-400 bottom-4 ${show ? '-left-3' : '-left-12'}`}>
+            <div onClick={() => setShow(!show)} className={`z-20 absolute cursor-pointer h-7 w-7 bg-white text-neutral-700 flex justify-center items-center border border-neutral-400 bottom-4 ${show ? '-left-3' : '-left-12'}`}>
                 {show ? 
                     <BiRightArrow className="h-4 w-4"></BiRightArrow>
                 :
@@ -72,7 +74,7 @@ function ElementPanel() {
 
             {show && <>
                 {(element && attributes) ?
-                    <div className="w-full h-full overflow-y-auto flex flex-col gap-4 divide-neutral-300 text-neutral-600">
+                    <div className="relative z-10 p-2 h-full overflow-y-auto w-full flex flex-col gap-4 divide-neutral-300 text-neutral-600">
 
                         {/* Element name */}
                         <div className="flex flex-col gap-2">
@@ -93,6 +95,11 @@ function ElementPanel() {
                         {/* Text */}
                         {typeAccess.text.includes(element.type) && 
                             <TextSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></TextSettings>
+                        }
+
+                        {/* Link */}
+                        {typeAccess.link.includes(element.type) && 
+                            <LinkSettings element={element} attributes={attributes} handleUpdate={handleUpdate} updateField={updateField}></LinkSettings>
                         }
 
                         {typeAccess.backgroundColor.includes(element.type) && <div className="flex w-full flex-col gap-2">

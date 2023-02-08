@@ -133,7 +133,7 @@ function Editor() {
                         clickedElement: clickedElement,
                         setClickedElement: setClickedElement,
                     }}>
-                    <div className="h-full flex bg-neutral-300">
+                    <div className="h-full flex bg-neutral-red-500">
                         <ComponentsPanel></ComponentsPanel>
                         <div className="w-full h-full relative">
                             <div className="absolute w-full h-full p-3 overflow-auto">
