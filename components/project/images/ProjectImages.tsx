@@ -27,7 +27,6 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
         console.log(e.target.files);
         if(!e.target.files) return;
         const files = Array.from(e.target.files);
-        const arr = Array<Image>();
         for(const file of files) {
             const fileID = crypto.randomUUID();
             await uploadBytes(ref(storage, id + '/' + fileID), file).then(async (snapshot) => {
@@ -40,12 +39,12 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                         type: file.type
                     }
                     await setDoc(doc(db, "projects/" + id + '/images/', fileID), image);
-                    console.log(image);
-                    arr.push(image);
+                    setImages((prevState) => {
+                        return [...prevState, image]
+                    });
                 })
             })
         }
-        setImages(arr);
     }
 
     const handlePick = (image: Image) => {
@@ -86,7 +85,8 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                                 <div className="w-full p-2 flex justify-between items-end">
                                     <div className="w-1/2 flex flex-col">
                                         <p className="font-semibold">{image.name}</p>
-                                        <p className="text-neutral-400">{image.uploaded.toDate().toLocaleDateString()}</p>
+                                        {/* {image.uploaded.toDate().toLocaleDateString()} */}
+                                        <p className="text-neutral-400"></p>
                                     </div>
                                     <div className="w-1/2 flex justify-end gap-2 items-end">
                                         <FiTrash onClick={(e) => {
@@ -108,7 +108,6 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                         <FiUploadCloud className="h-5 w-5"></FiUploadCloud>
                         <p>Upload images</p>
                     </button>
-
                     <input multiple className="hidden" type="file" accept="image/png, image/jpeg" ref={uploadRef} onChange={(e) => handleUpload(e)} />
                 </div>
             </div>

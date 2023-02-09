@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { createContext } from "react";
 import { auth, db } from "@/firebase";
@@ -13,11 +12,8 @@ export const UserContextProvider = ({ children } : {children: JSX.Element}) => {
     const [user, setUser] = useState<User | null>(null);
     const [id, setID] = useState<string | null>(null);
 
-    const router = useRouter();
-
     useEffect(() => {
         const authSession = auth.onAuthStateChanged(async (data) => {
-            console.log(data);
             if(data) {
                 setID(data.uid);
             } else {

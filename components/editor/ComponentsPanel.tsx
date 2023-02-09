@@ -27,7 +27,7 @@ function ComponentsPanel() {
     ]
 
     return (
-        <div className={`${!show ? 'w-0 z-50' : 'w-96 max-w-[15rem] z-20'} transition-all duration-300 relative h-full bg-white border-r border-neutral-400 flex flex-col gap-2 divide-y divide-neutral-400`}>
+        <div className={`${!show ? 'w-0 z-[300]' : 'w-96 max-w-[15rem] z-20'} transition-all duration-300 relative h-full bg-white border-r border-neutral-400 flex flex-col gap-2 divide-y divide-neutral-400`}>
             
             {/* Toggler */}
             <div onClick={() => setShow(!show)} className="absolute cursor-pointer h-7 w-7 bg-white text-neutral-700 flex justify-center items-center border border-neutral-400 bottom-4 -right-3">
