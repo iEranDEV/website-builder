@@ -3,10 +3,12 @@ import { collection, doc, getDocs, setDoc, Timestamp } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { FiEdit, FiTrash, FiUploadCloud, FiX } from "react-icons/fi";
+import { FiTrash, FiUploadCloud, FiX } from "react-icons/fi";
+import DeleteImageModal from "./DeleteImageModal";
 
 function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Function}) {
     const [images, setImages] = useState(Array<Image>());
+    const [deleteModal, setDeleteModal] = useState<Image | null>(null);
 
     const router = useRouter();
     const { id } = router.query;
@@ -56,6 +58,12 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
         if(id) syncImages();
     }, [id]);
 
+    const deleteImage = (img: Image) => {
+        const newImages = [...images];
+        newImages.splice(newImages.findIndex((item) => item.id === img.id), 1);
+        setImages(newImages)
+    }
+
     return (
         <div className="w-screen h-screen fixed z-[150] top-0 left-0 flex justify-center items-center backdrop-blur-[1px] bg-neutral-400/50">
             <div className="bg-white shadow-xl h-full w-full md:w-5/6 md:h-5/6 rounded-xl p-4 flex flex-col gap-4 text-neutral-600">
@@ -81,7 +89,10 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                                         <p className="text-neutral-400">{image.uploaded.toDate().toLocaleDateString()}</p>
                                     </div>
                                     <div className="w-1/2 flex justify-end gap-2 items-end">
-                                        <FiTrash onClick={(e) => e.stopPropagation()} className="h-5 w-5 cursor-pointer hover:text-red-500"></FiTrash>
+                                        <FiTrash onClick={(e) => {
+                                            e.stopPropagation();
+                                            setDeleteModal(image);
+                                        }} className="h-5 w-5 cursor-pointer hover:text-red-500"></FiTrash>
                                     </div>
                                 </div>
                             </div>
@@ -101,6 +112,8 @@ function ProjectImages({ onPick, setMenu }: {onPick?: Function, setMenu: Functio
                     <input multiple className="hidden" type="file" accept="image/png, image/jpeg" ref={uploadRef} onChange={(e) => handleUpload(e)} />
                 </div>
             </div>
+
+            {deleteModal && <DeleteImageModal projectID={id as string} image={deleteModal} setMenu={setDeleteModal} deleteImage={deleteImage}></DeleteImageModal>}
         </div>
     )
 }
